@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GarageViewController.swift
 //  SanJoseParkingGarages
 //
 //  Created by Lisa Litchfield on 4/27/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GarageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -34,6 +34,9 @@
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lao-3o-T0z">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="118.33333333333334"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="gf5-tb-UAe"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="egG-Kl-y51"/>
                                         </connections>
@@ -46,7 +49,7 @@
                                         <rect key="frame" x="0.0" y="148.33333333333331" width="414" height="499.66666666666669"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="brZ-u3-fK7">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GarageTableCell" id="brZ-u3-fK7" userLabel="GarageTableCell" customClass="GarageTableCell" customModule="SanJoseParkingGarages" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="brZ-u3-fK7" id="JX9-OJ-Lhl">
@@ -87,6 +90,11 @@
                                                         <constraint firstItem="xuV-vu-suD" firstAttribute="leading" secondItem="JX9-OJ-Lhl" secondAttribute="leading" constant="8" id="hj4-Ss-ZEa"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="capacityLabel" destination="s1Y-zm-zVe" id="Vbx-U4-R1H"/>
+                                                    <outlet property="nameLabel" destination="Phl-Dn-Tbo" id="p91-ia-KPL"/>
+                                                    <outlet property="spacesLabel" destination="FiB-FM-Plt" id="YTo-aV-o37"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>
@@ -109,16 +117,15 @@
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="H5Y-86-QCg" secondAttribute="bottom" id="EEb-Pw-N2H"/>
                             <constraint firstItem="H5Y-86-QCg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="EZ6-jM-YFW"/>
-                            <constraint firstItem="lMb-Al-pY2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XTF-5Q-Y4P"/>
                             <constraint firstAttribute="trailing" secondItem="H5Y-86-QCg" secondAttribute="trailing" id="hkp-wu-h5e"/>
-                            <constraint firstItem="lMb-Al-pY2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="pVz-xq-aRM"/>
-                            <constraint firstAttribute="trailing" secondItem="lMb-Al-pY2" secondAttribute="trailing" id="sAu-zU-zlo"/>
-                            <constraint firstItem="H5Y-86-QCg" firstAttribute="top" secondItem="lMb-Al-pY2" secondAttribute="bottom" id="uFd-fT-8j4"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="rNl-W7-l5h"/>
+                    <navigationItem key="navigationItem" id="0XP-pa-U0I"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="Lao-3o-T0z" id="1Tu-ag-bbb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

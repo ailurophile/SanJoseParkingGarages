@@ -19,14 +19,14 @@ class JunarClient: NSObject{
     }
     //MARK: Parameter Keys
     struct ParameterKeys {
-        static let APIKey = "api_key"
+        static let APIKey = "auth_key"
         static let GarageKey = "result"
 
         
     }
     //MARK: Parameter Values
     struct ParameterValues {
-        static let APIKey = "1581bca6581630ffc1e5c63e0e0e13e6c7813c25"
+        static let APIKey = "f3313e775ed0dbb3cc053ab1d1aafa07504d586c"
     }
     //MARK: Networking methods
     //Build URL

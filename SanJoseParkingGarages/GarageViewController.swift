@@ -12,21 +12,57 @@ import MapKit
 
 
 class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
-    let garages = ["garage 1", "garage 2", "garage 3"]
-    let spaces = [25,35,45]
-    let capacities = [30,100,150]
+    var garages = ["garage 1", "garage 2", "garage 3"]
+    var spaces = [25,35,45]
+    var capacities = [30,100,150]
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        getParkingData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func RefreshButtonSelected(_ sender: Any) {
+        getParkingData()
+    }
+    func getParkingData(){
+        //Animate Activity Indicator
+        activityIndicator.startAnimating()
+        JunarClient.sharedInstance().queryJunar(completionHandlerForQuery: {(results, error) in
+            guard error == nil else{
+//                self.activityIndicator.stopAnimating()
+                print(error?.localizedDescription ?? "?? no localized description to print")
+                notifyUser(self, message: "Error retrieving garage data!")
+               
+
+                return
+            }
+            //Load garage dictionary
+            guard let data = results as! [String: Any]? else{
+                notifyUser(self, message: "No garage data!")
+
+                return
+            }
+            if let dict = data[JunarClient.ParameterKeys.GarageKey]{
+               print(dict)
+            }
+            else {
+                notifyUser(self, message: "No results key found in garage data!")
+ 
+            }
+
+        })
+        
+    }
+
     
 // MARK: TableView Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

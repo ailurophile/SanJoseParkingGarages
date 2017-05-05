@@ -13,7 +13,7 @@ class JunarClient: NSObject{
         //MARK: URLs
         static let ApiScheme = "http"
         static let ApiHost = "api.data.sanjoseca.gov"
-        static let SessionPath = "/v2/datastreams/PARKI-GARAG-DATA/data.ajson"
+        static let SessionPath = "/api/v2/datastreams/PARKI-GARAG-DATA/data.ajson/"
         static let HTTPMethod = "GET"
         
     }

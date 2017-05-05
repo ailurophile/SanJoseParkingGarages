@@ -13,16 +13,18 @@ import MapKit
 
 class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate {
     var garages = ["garage 1", "garage 2", "garage 3"]
-    var spaces = [25,35,45]
-    var capacities = [30,100,150]
+    var spaces = ["25","35","45"]
+    var capacities = ["30","100","150"]
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
         getParkingData()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,8 +39,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Animate Activity Indicator
         activityIndicator.startAnimating()
         JunarClient.sharedInstance().queryJunar(completionHandlerForQuery: {(results, error) in
+            self.activityIndicator.stopAnimating()
             guard error == nil else{
-//                self.activityIndicator.stopAnimating()
                 print(error?.localizedDescription ?? "?? no localized description to print")
                 notifyUser(self, message: "Error retrieving garage data!")
                
@@ -48,11 +50,20 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //Load garage dictionary
             guard let data = results as! [String: Any]? else{
                 notifyUser(self, message: "No garage data!")
-
                 return
             }
-            if let dict = data[JunarClient.ParameterKeys.GarageKey]{
-               print(dict)
+            if var garageArrays = data[JunarClient.ParameterKeys.GarageKey] as! [[String]]?{
+                garageArrays.removeFirst()  //remove column headings for web page
+                for garage in garageArrays{
+                    self.garages.append(garage[0].replacingOccurrences(of: "Garage", with: ""))
+                    self.spaces.append(garage[2])
+                    self.capacities.append(garage[3])
+                }
+                print(garageArrays)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    
+                }
             }
             else {
                 notifyUser(self, message: "No results key found in garage data!")

@@ -15,6 +15,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var garages = ["garage 1", "garage 2", "garage 3"]
     var spaces = ["25","35","45"]
     var capacities = ["30","100","150"]
+    var time:NSDate!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
@@ -24,6 +25,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         mapView.delegate = self
         getParkingData()
+        time = NSDate()
 
     }
 
@@ -62,6 +64,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print(garageArrays)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    let currentTime = NSDate()
+                    let elapsedTime = self.time.timeIntervalSinceNow
+                    print("creation time: \(self.time) current time: \(currentTime) interval: \(elapsedTime)")
                     
                 }
             }

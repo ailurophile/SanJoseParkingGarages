@@ -16,6 +16,10 @@
 		D7099DA21EB3F2A800C1B2F6 /* GarageTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7099DA11EB3F2A800C1B2F6 /* GarageTableCell.swift */; };
 		D78397491EBB939D00F64DCB /* Junar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397481EBB939D00F64DCB /* Junar.swift */; };
 		D783974B1EBBAB0000F64DCB /* NotifyUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D783974A1EBBAB0000F64DCB /* NotifyUser.swift */; };
+		D78397581EBD936800F64DCB /* Garage+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397541EBD936800F64DCB /* Garage+CoreDataClass.swift */; };
+		D78397591EBD936800F64DCB /* Garage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397551EBD936800F64DCB /* Garage+CoreDataProperties.swift */; };
+		D783975A1EBD936800F64DCB /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */; };
+		D783975B1EBD936800F64DCB /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +32,12 @@
 		D7099D991EB29F4200C1B2F6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7099D9B1EB29F4200C1B2F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7099DA11EB3F2A800C1B2F6 /* GarageTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageTableCell.swift; sourceTree = "<group>"; };
-		D78397481EBB939D00F64DCB /* Junar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Junar.swift; sourceTree = "<group>"; };
+		D78397481EBB939D00F64DCB /* Junar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Junar.swift; path = SanJoseParkingGarages/Junar.swift; sourceTree = "<group>"; };
 		D783974A1EBBAB0000F64DCB /* NotifyUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotifyUser.swift; sourceTree = "<group>"; };
+		D78397541EBD936800F64DCB /* Garage+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Garage+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D78397551EBD936800F64DCB /* Garage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Garage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +54,8 @@
 		D7099D801EB29F4200C1B2F6 = {
 			isa = PBXGroup;
 			children = (
+				D78397551EBD936800F64DCB /* Garage+CoreDataProperties.swift */,
+				D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */,
 				D7099D8B1EB29F4200C1B2F6 /* SanJoseParkingGarages */,
 				D7099D8A1EB29F4200C1B2F6 /* Products */,
 			);
@@ -62,18 +72,61 @@
 		D7099D8B1EB29F4200C1B2F6 /* SanJoseParkingGarages */ = {
 			isa = PBXGroup;
 			children = (
-				D7099D8C1EB29F4200C1B2F6 /* AppDelegate.swift */,
-				D7099D8E1EB29F4200C1B2F6 /* GarageViewController.swift */,
-				D7099D901EB29F4200C1B2F6 /* Main.storyboard */,
-				D783974A1EBBAB0000F64DCB /* NotifyUser.swift */,
-				D78397481EBB939D00F64DCB /* Junar.swift */,
-				D7099DA11EB3F2A800C1B2F6 /* GarageTableCell.swift */,
-				D7099D961EB29F4200C1B2F6 /* Assets.xcassets */,
-				D7099D981EB29F4200C1B2F6 /* LaunchScreen.storyboard */,
-				D7099D9B1EB29F4200C1B2F6 /* Info.plist */,
-				D7099D931EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodeld */,
+				D78397601EBD95E800F64DCB /* Supporting Files */,
+				D783975C1EBD94CA00F64DCB /* Model */,
+				D783975D1EBD954300F64DCB /* Control */,
+				D783975F1EBD95CE00F64DCB /* Assets */,
+				D783975E1EBD955D00F64DCB /* View */,
 			);
 			path = SanJoseParkingGarages;
+			sourceTree = "<group>";
+		};
+		D783975C1EBD94CA00F64DCB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D78397481EBB939D00F64DCB /* Junar.swift */,
+				D78397541EBD936800F64DCB /* Garage+CoreDataClass.swift */,
+				D7099D931EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodeld */,
+				D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */,
+			);
+			name = Model;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		D783975D1EBD954300F64DCB /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				D7099D8E1EB29F4200C1B2F6 /* GarageViewController.swift */,
+			);
+			name = Control;
+			sourceTree = "<group>";
+		};
+		D783975E1EBD955D00F64DCB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D7099DA11EB3F2A800C1B2F6 /* GarageTableCell.swift */,
+				D7099D981EB29F4200C1B2F6 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		D783975F1EBD95CE00F64DCB /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				D7099D901EB29F4200C1B2F6 /* Main.storyboard */,
+				D7099D961EB29F4200C1B2F6 /* Assets.xcassets */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		D78397601EBD95E800F64DCB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D7099D8C1EB29F4200C1B2F6 /* AppDelegate.swift */,
+				D783974A1EBBAB0000F64DCB /* NotifyUser.swift */,
+				D7099D9B1EB29F4200C1B2F6 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,11 +202,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D783975A1EBD936800F64DCB /* Pin+CoreDataClass.swift in Sources */,
 				D7099D8F1EB29F4200C1B2F6 /* GarageViewController.swift in Sources */,
 				D7099D951EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodeld in Sources */,
+				D783975B1EBD936800F64DCB /* Pin+CoreDataProperties.swift in Sources */,
 				D7099D8D1EB29F4200C1B2F6 /* AppDelegate.swift in Sources */,
 				D783974B1EBBAB0000F64DCB /* NotifyUser.swift in Sources */,
+				D78397591EBD936800F64DCB /* Garage+CoreDataProperties.swift in Sources */,
 				D7099DA21EB3F2A800C1B2F6 /* GarageTableCell.swift in Sources */,
+				D78397581EBD936800F64DCB /* Garage+CoreDataClass.swift in Sources */,
 				D78397491EBB939D00F64DCB /* Junar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,7 +388,8 @@
 				D7099D941EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodel */,
 			);
 			currentVersion = D7099D941EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodel */;
-			path = SanJoseParkingGarages.xcdatamodeld;
+			name = SanJoseParkingGarages.xcdatamodeld;
+			path = SanJoseParkingGarages/SanJoseParkingGarages.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

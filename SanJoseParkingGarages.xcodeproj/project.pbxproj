@@ -20,6 +20,7 @@
 		D78397591EBD936800F64DCB /* Garage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397551EBD936800F64DCB /* Garage+CoreDataProperties.swift */; };
 		D783975A1EBD936800F64DCB /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */; };
 		D783975B1EBD936800F64DCB /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */; };
+		D78397621EBE6A1900F64DCB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397611EBE6A1900F64DCB /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		D78397551EBD936800F64DCB /* Garage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Garage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D78397611EBE6A1900F64DCB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			children = (
 				D78397481EBB939D00F64DCB /* Junar.swift */,
 				D78397541EBD936800F64DCB /* Garage+CoreDataClass.swift */,
+				D78397611EBE6A1900F64DCB /* Constants.swift */,
 				D7099D931EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodeld */,
 				D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */,
 			);
@@ -203,6 +206,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D783975A1EBD936800F64DCB /* Pin+CoreDataClass.swift in Sources */,
+				D78397621EBE6A1900F64DCB /* Constants.swift in Sources */,
 				D7099D8F1EB29F4200C1B2F6 /* GarageViewController.swift in Sources */,
 				D7099D951EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodeld in Sources */,
 				D783975B1EBD936800F64DCB /* Pin+CoreDataProperties.swift in Sources */,
@@ -342,6 +346,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = LL.SanJoseParkingGarages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -355,6 +360,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = LL.SanJoseParkingGarages;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

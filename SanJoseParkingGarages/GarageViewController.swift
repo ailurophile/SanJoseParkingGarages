@@ -17,9 +17,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var storedPins:[Pin]!
     var annotations = [MKAnnotation]()
     var numberOfPinsOnMap = 0
-    var garages = ["garage 1", "garage 2", "garage 3"]
-    var spaces = ["25","35","45"]
-    var capacities = ["30","100","150"]
     var time:NSDate!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -30,8 +27,11 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         mapView.delegate = self
         mapView.centerCoordinate = CLLocationCoordinate2DMake(Constants.MapCenterLatitude, Constants.MapCenterLongitude)
+        let center = CLLocationCoordinate2DMake(Constants.MapCenterLatitude, Constants.MapCenterLongitude)
         let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)
-//        mapView.region.span = span
+//        let region = MKCoordinateRegionMakeWithDistance(center, Constants.LatDelta, Constants.LonDelta)
+        mapView.region.span = span
+//        mapView.setRegion(region, animated: true)
         //Load garage data from Core Data
         loadGarages()
         //Load Pins and add to map
@@ -61,7 +61,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             guard error == nil else{
                 print(error?.localizedDescription ?? "?? no localized description to print")
-                notifyUser(self, message: "Error retrieving garage data!")
+                notifyUser(self, message: "Error: \(error!.localizedDescription)")
                 DispatchQueue.main.async {
                     self.activityIndicator.stopAnimating()
                 }
@@ -82,22 +82,33 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 //Get the persistent container
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
+                garageArrays.removeFirst()  //remove column headings for web page
                 //check if more garages in Core Data than returned from API
                 if self.garageObjects.count > garageArrays.count {
                     print("old garages hanging around!  clearing out database")
-                    //clear all objects from local memory
-                    self.garageObjects.removeAll()
-                    self.storedPins.removeAll()
-                    self.annotations.removeAll()
+                    
                     //Clear all objects from Core Data
                     DispatchQueue.main.sync {
                         for object in self.garageObjects{
                             context.delete(object as! NSManagedObject)
                         }
+                        do {
+                            print("saving context")
+                            try context.save()
+                        } catch {
+                            let nserror = error as NSError
+                            print("Unresolved error \(nserror), \(nserror.userInfo)")
+                        }
+
+                        
                     }
+                    //clear all objects from local memory
+                    self.garageObjects.removeAll()
+                    self.storedPins.removeAll()
+                    self.annotations.removeAll()
                 }
                 self.time = NSDate() //for use as timestamp for invalidating data
-                garageArrays.removeFirst()  //remove column headings for web page
+                
                 for garage in garageArrays{
                     let open = ((garage[Index.Open]==Status.Open) ? true: false)
                     //update existing Garage object
@@ -235,6 +246,11 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return annotation
         
         
+    }
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        let center = mapView.centerCoordinate
+        let span = mapView.region.span
+        print("map center: \(center) span: \(span)")
     }
 
 //MARK: Core Data methods

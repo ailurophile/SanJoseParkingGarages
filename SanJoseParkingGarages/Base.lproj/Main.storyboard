@@ -34,20 +34,20 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="392"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lao-3o-T0z">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="118" id="MbB-Ys-1kE"/>
+                                            <constraint firstAttribute="height" constant="150" id="MbB-Ys-1kE"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="egG-Kl-y51"/>
                                         </connections>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jsd-WL-xdx">
-                                        <rect key="frame" x="96" y="118" width="128" height="0.0"/>
+                                        <rect key="frame" x="96" y="150" width="128" height="0.0"/>
                                         <state key="normal" title="Location Reminder"/>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-by-Ovr">
-                                        <rect key="frame" x="0.0" y="118" width="320" height="274"/>
+                                        <rect key="frame" x="0.0" y="150" width="320" height="242"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="wSJ-yg-mQD">
                                             <rect key="frame" x="0.0" y="72" width="320" height="20"/>
@@ -58,7 +58,7 @@
                                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="brZ-u3-fK7" id="JX9-OJ-Lhl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="xuV-vu-suD">

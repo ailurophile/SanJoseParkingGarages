@@ -29,6 +29,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
+        mapView.centerCoordinate = CLLocationCoordinate2DMake(Constants.MapCenterLatitude, Constants.MapCenterLongitude)
+        let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)
+//        mapView.region.span = span
         //Load garage data from Core Data
         loadGarages()
         //Load Pins and add to map
@@ -76,8 +79,25 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             //["Garage_Name","Garage_Status","Available_Visitor_Spaces","Total_Visitor_Spaces"]
             if var garageArrays = data[JunarClient.ParameterKeys.GarageKey] as! [[String]]?{
-                //TBD check if more garages in Core Data than returned from API**************
+                //Get the persistent container
+                let delegate = UIApplication.shared.delegate as! AppDelegate
+                let context = delegate.persistentContainer.viewContext
+                //check if more garages in Core Data than returned from API
+                if self.garageObjects.count > garageArrays.count {
+                    print("old garages hanging around!  clearing out database")
+                    //clear all objects from local memory
+                    self.garageObjects.removeAll()
+                    self.storedPins.removeAll()
+                    self.annotations.removeAll()
+                    //Clear all objects from Core Data
+                    DispatchQueue.main.sync {
+                        for object in self.garageObjects{
+                            context.delete(object as! NSManagedObject)
+                        }
+                    }
+                }
                 self.time = NSDate() //for use as timestamp for invalidating data
+                garageArrays.removeFirst()  //remove column headings for web page
                 for garage in garageArrays{
                     let open = ((garage[Index.Open]==Status.Open) ? true: false)
                     //update existing Garage object
@@ -90,11 +110,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     //Create new Garage object
                         
                     else{
-                        //Get the persistent container
-                        let delegate = UIApplication.shared.delegate as! AppDelegate
-                        let context = delegate.persistentContainer.viewContext
+                        
 
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.sync {
                             let newGarage = Garage(entity: Garage.entity(), insertInto: context)
                             //Leave the word "Garage" off of name if device has small screen
                             if UIScreen.main.bounds.size.height < CGFloat(Constants.SmallScreenHeight){
@@ -107,6 +125,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             newGarage.spaces = garage[Index.Spaces]
                             newGarage.capacity = garage[Index.Capacity]
                             newGarage.timestamp = self.time
+                            self.garageObjects.append(newGarage)
                             //Forward Geocode garage location
                             let request = MKLocalSearchRequest()
                             request.naturalLanguageQuery = garage[Index.Name] + Constants.City
@@ -123,6 +142,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 newPin.garage = newGarage
                                 newPin.latitude = mapItem.placemark.coordinate.latitude
                                 newPin.longitude = mapItem.placemark.coordinate.longitude
+                                self.storedPins.append(newPin)
                                 print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
                                 //Create map annotation for display
                                 let annotation = MKPointAnnotation()
@@ -131,37 +151,39 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 self.annotations.append(annotation)
                                 
                             })
+                          /*
+                            if context.hasChanges{
+                                do {
+                                    print("saving context")
+                                    try context.save()
+                                } catch {
+                                    let nserror = error as NSError
+                                    print("Unresolved error \(nserror), \(nserror.userInfo)")
+                                }
+                            }
 
-                            
+                         */
                             
                         }
                     }
                 }
-                
-                
-/*                self.garages.removeAll()
-                self.spaces.removeAll()
-                self.capacities.removeAll()
-                garageArrays.removeFirst()  //remove column headings for web page
-                for garage in garageArrays{
-                    if UIScreen.main.bounds.size.height < CGFloat(Constants.SmallScreenHeight){
-                        self.garages.append(garage[Index.Name].replacingOccurrences(of: "Garage", with: ""))
+                DispatchQueue.main.sync {
+                    self.tableView.reloadData() // show latest data on table
+
+                    if context.hasChanges{
+                        do {
+                            print("saving context")
+                            try context.save()
+                        } catch {
+                            let nserror = error as NSError
+                            print("Unresolved error \(nserror), \(nserror.userInfo)")
+                        }
                     }
-                    else {
-                        self.garages.append(garage[Index.Name])
-                    }
-                    self.spaces.append(garage[Index.Spaces])
-                    self.capacities.append(garage[Index.Capacity])
+                    
                 }
-                print(garageArrays)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    let currentTime = Date()
-                    let elapsedTime = self.time.timeIntervalSinceNow
-                    print("creation time: \(self.time) current time: \(currentTime) interval: \(elapsedTime)")
- 
-                } */
+                
             }
+                
             else {
                 notifyUser(self, message: "No results key found in garage data!")
  
@@ -179,25 +201,26 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "GarageTableCell", for: indexPath) as! GarageTableCell
-        cell.nameLabel?.text = garages[indexPath.row]
-        cell.spacesLabel?.text = "\(spaces[indexPath.row])"
-        cell.capacityLabel?.text = "\(capacities[indexPath.row])"
+        cell.nameLabel?.text = garageObjects[indexPath.row].name
+        cell.spacesLabel?.text = garageObjects[indexPath.row].open ? garageObjects[indexPath.row].spaces:"closed"
+        //TBD Replace with -- if stale
+        cell.capacityLabel?.text = garageObjects[indexPath.row].capacity
         
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return garages.count
+        return garageObjects.count
     }
  //MARK: Map methods
     private func addAnnotationsToMap(){
         
-        annotations.removeAll()
+
         mapView.removeAnnotations(mapView.annotations)
-        for pin in storedPins{
+/*        for pin in storedPins{
             let annotation = GarageViewController.getAnnotation(pin: pin)
             annotations.append(annotation)
             
-        }
+        }*/
         numberOfPinsOnMap = annotations.count
         mapView.addAnnotations(annotations)
     }

@@ -18,6 +18,10 @@ struct Constants {
     static let ParkingDataExpiration = 1800.0 //30 minutes to stale
     static let MapDataExpiration = 86400.0 //24 hours to stale
     static let City = "San Jose, CA"
+    static let MapCenterLatitude = 37.30
+    static let MapCenterLongitude = -121.88
+    static let LatDelta = 125.4/2.0
+    static let LonDelta = 112.4/2.0
 }
 
 struct GarageProperties {

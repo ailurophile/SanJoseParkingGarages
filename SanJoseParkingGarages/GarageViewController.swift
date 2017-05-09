@@ -80,13 +80,13 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
-//                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
+//                garageArrays.removeLast()  //remove garage so it will look like a garage has been sold
                 //check if more garages in Core Data than returned from API
                 if self.garageObjects.count > garageArrays.count {
                     print("old garages hanging around!  clearing out database")
                     
                     //Clear all objects from Core Data
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         for object in self.garageObjects{
                             context.delete(object as NSManagedObject)
                         }
@@ -124,7 +124,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     else{
                         
 
-                        DispatchQueue.main.sync {
+                        DispatchQueue.main.async {
                             let newGarage = Garage(entity: Garage.entity(), insertInto: context)
                             //Leave the word "Garage" off of name if device has small screen
                             if UIScreen.main.bounds.size.height < CGFloat(Constants.SmallScreenHeight){
@@ -194,7 +194,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         }
                     }
                 }
-                DispatchQueue.main.sync {
+                DispatchQueue.main.async {
                     self.tableView.reloadData() // show latest data on table
 
                     if context.hasChanges{
@@ -236,7 +236,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 sendAlert(self, message: "Location not found!")
                 return
             }
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 //Create Pin for garage location
                 let newPin = Pin(entity: Pin.entity(), insertInto: context)
                 newPin.garage = garage
@@ -250,6 +250,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 annotation.coordinate.longitude = newPin.longitude
                 annotation.title = garage.name
                 self.annotations.append(annotation)
+                self.addAnnotationsToMap()
                 do {
                     print("saving context")
                     try context.save()

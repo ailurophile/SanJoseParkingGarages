@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9By-6Z-eXk">
-    <device id="retina3_5" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,19 +19,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lMb-Al-pY2">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Available Parking" id="IQt-k8-EeL">
-                                        <barButtonItem key="rightBarButtonItem" title="Refresh" id="7Kj-fs-K65"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="H5Y-86-QCg">
-                                <rect key="frame" x="0.0" y="44" width="320" height="392"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="460"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lao-3o-T0z">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
@@ -42,18 +34,18 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="egG-Kl-y51"/>
                                         </connections>
                                     </mapView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jsd-WL-xdx">
-                                        <rect key="frame" x="96" y="140" width="128" height="0.0"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jsd-WL-xdx">
+                                        <rect key="frame" x="96" y="140" width="128" height="30"/>
                                         <state key="normal" title="Location Reminder"/>
                                         <connections>
                                             <segue destination="eDi-PY-3o3" kind="show" id="Kys-tW-iQk"/>
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wSJ-yg-mQD">
-                                        <rect key="frame" x="150" y="140" width="20" height="10"/>
+                                        <rect key="frame" x="150" y="170" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-by-Ovr">
-                                        <rect key="frame" x="0.0" y="150" width="320" height="242"/>
+                                        <rect key="frame" x="0.0" y="190" width="320" height="270"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GarageTableCell" id="brZ-u3-fK7" userLabel="GarageTableCell" customClass="GarageTableCell" customModule="SanJoseParkingGarages" customModuleProvider="target">
@@ -111,18 +103,16 @@
                                     <constraint firstItem="Lao-3o-T0z" firstAttribute="leading" secondItem="tiQ-by-Ovr" secondAttribute="leading" id="2Fg-wW-BLo"/>
                                     <constraint firstItem="Jsd-WL-xdx" firstAttribute="top" secondItem="Lao-3o-T0z" secondAttribute="bottom" id="5uq-D9-Lq4"/>
                                     <constraint firstItem="Lao-3o-T0z" firstAttribute="leading" secondItem="H5Y-86-QCg" secondAttribute="leading" id="OFD-K8-G88"/>
+                                    <constraint firstItem="Lao-3o-T0z" firstAttribute="top" secondItem="H5Y-86-QCg" secondAttribute="top" id="ON6-pP-ajn"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="lMb-Al-pY2" secondAttribute="trailing" id="3dA-Ct-Zjc"/>
-                            <constraint firstItem="H5Y-86-QCg" firstAttribute="top" secondItem="lMb-Al-pY2" secondAttribute="bottom" id="6h6-mp-sLR"/>
-                            <constraint firstItem="lMb-Al-pY2" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="87e-2K-n5J"/>
                             <constraint firstItem="H5Y-86-QCg" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Dch-8A-GCs"/>
-                            <constraint firstItem="lMb-Al-pY2" firstAttribute="trailing" secondItem="H5Y-86-QCg" secondAttribute="trailing" id="GgN-oo-ldj"/>
-                            <constraint firstItem="lMb-Al-pY2" firstAttribute="leading" secondItem="H5Y-86-QCg" secondAttribute="leading" id="HcS-Ve-lUz"/>
-                            <constraint firstItem="lMb-Al-pY2" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="J0o-AK-olS"/>
+                            <constraint firstAttribute="trailing" secondItem="H5Y-86-QCg" secondAttribute="trailing" id="YCe-80-tiB"/>
+                            <constraint firstItem="H5Y-86-QCg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="YiY-LD-EUO"/>
+                            <constraint firstItem="H5Y-86-QCg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xpg-BH-Jqt"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -138,11 +128,64 @@
                         <outlet property="activityIndicator" destination="wSJ-yg-mQD" id="BQH-xG-96o"/>
                         <outlet property="mapView" destination="Lao-3o-T0z" id="1Tu-ag-bbb"/>
                         <outlet property="tableView" destination="tiQ-by-Ovr" id="atg-1r-Ltz"/>
+                        <segue destination="Gvk-4N-2ru" kind="show" identifier="directions" id="XIY-bt-Tgi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="417" y="177"/>
+        </scene>
+        <!--Directions View Controller-->
+        <scene sceneID="oI6-xF-tlz">
+            <objects>
+                <viewController id="Gvk-4N-2ru" customClass="DirectionsViewController" customModule="SanJoseParkingGarages" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8pn-U0-Z6f"/>
+                        <viewControllerLayoutGuide type="bottom" id="7rP-GG-RDq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2F0-cU-fLE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="6tP-4v-neU">
+                                <rect key="frame" x="0.0" y="30" width="320" height="538"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riz-qm-mgO">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                        <state key="normal" title="Get Directions Via Maps"/>
+                                        <connections>
+                                            <action selector="getDirections:" destination="Gvk-4N-2ru" eventType="touchUpInside" id="Evf-KA-mWQ"/>
+                                        </connections>
+                                    </button>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LBU-kV-ZfR">
+                                        <rect key="frame" x="0.0" y="41" width="320" height="497"/>
+                                    </mapView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="LBU-kV-ZfR" secondAttribute="trailing" id="AXB-cE-uZO"/>
+                                    <constraint firstItem="riz-qm-mgO" firstAttribute="leading" secondItem="6tP-4v-neU" secondAttribute="leading" id="Hv7-1l-7R9"/>
+                                    <constraint firstAttribute="bottom" secondItem="LBU-kV-ZfR" secondAttribute="bottom" id="X04-Xx-1Z3"/>
+                                    <constraint firstAttribute="trailing" secondItem="riz-qm-mgO" secondAttribute="trailing" id="krh-Hq-8DX"/>
+                                    <constraint firstItem="LBU-kV-ZfR" firstAttribute="leading" secondItem="6tP-4v-neU" secondAttribute="leading" id="wb9-LZ-ARW"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="6tP-4v-neU" secondAttribute="trailing" id="a7f-AH-Mng"/>
+                            <constraint firstItem="6tP-4v-neU" firstAttribute="leading" secondItem="2F0-cU-fLE" secondAttribute="leading" id="nbL-kJ-52Z"/>
+                            <constraint firstItem="7rP-GG-RDq" firstAttribute="top" secondItem="6tP-4v-neU" secondAttribute="bottom" id="ohH-Bs-LJA"/>
+                            <constraint firstItem="6tP-4v-neU" firstAttribute="top" secondItem="8pn-U0-Z6f" secondAttribute="bottom" constant="10" id="pl6-1D-lr1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="LBU-kV-ZfR" id="Qgg-1c-q95"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aha-RB-h9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1178" y="-601"/>
         </scene>
         <!--Location View Controller-->
         <scene sceneID="lsl-sO-uRP">
@@ -153,14 +196,14 @@
                         <viewControllerLayoutGuide type="bottom" id="OaH-g7-uSO"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ifw-55-nim">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
-                                <rect key="frame" x="47" y="83" width="226" height="314"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
+                                <rect key="frame" x="47" y="64" width="226" height="440"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
-                                        <rect key="frame" x="89.5" y="0.0" width="47" height="137"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
+                                        <rect key="frame" x="89.5" y="0.0" width="47" height="38"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
@@ -168,7 +211,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
-                                        <rect key="frame" x="0.0" y="137" width="226" height="177"/>
+                                        <rect key="frame" x="0.0" y="44" width="226" height="396"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -187,7 +230,7 @@
                             <constraint firstItem="me4-fX-SI0" firstAttribute="leading" secondItem="ifw-55-nim" secondAttribute="leadingMargin" constant="31" id="SiV-Yj-lSf"/>
                             <constraint firstItem="me4-fX-SI0" firstAttribute="centerY" secondItem="ifw-55-nim" secondAttribute="centerY" id="Tqb-ft-pdT"/>
                             <constraint firstItem="me4-fX-SI0" firstAttribute="centerX" secondItem="ifw-55-nim" secondAttribute="centerX" id="j1I-OE-SEv"/>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" constant="19" id="s01-gC-GeJ"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" id="s01-gC-GeJ"/>
                         </constraints>
                     </view>
                     <connections>

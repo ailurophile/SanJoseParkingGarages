@@ -80,7 +80,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
-//                garageArrays.removeFirst()  //remove column headings for web page
+//                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
                 //check if more garages in Core Data than returned from API
                 if self.garageObjects.count > garageArrays.count {
                     print("old garages hanging around!  clearing out database")
@@ -115,6 +115,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         garageObject.spaces = garage[Index.Spaces]
                         garageObject.open = open
                         garageObject.timestamp = self.time
+                        if garageObject.pin == nil{
+                            self.findLocation(garage: garageObject)
+                        }
                     }
                     //Create new Garage object
                         
@@ -135,6 +138,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             newGarage.capacity = garage[Index.Capacity]
                             newGarage.timestamp = self.time
                             self.garageObjects.append(newGarage)
+                            
+                            self.findLocation(garage: newGarage)
+                            /*
                             //Forward Geocode garage location
                             let request = MKLocalSearchRequest()
                             request.naturalLanguageQuery = garage[Index.Name] + Constants.City
@@ -159,8 +165,19 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 annotation.coordinate.longitude = newPin.longitude
                                 annotation.title = newGarage.name
                                 self.annotations.append(annotation)
+                                self.addAnnotationsToMap()
+                                do {
+                                    print("saving context")
+                                    try context.save()
+                                } catch {
+                                    let nserror = error as NSError
+                                    print("Unresolved error \(nserror), \(nserror.userInfo)")
+                                }
+
                                 
                             })
+                            */
+ 
                           /*
                             if context.hasChanges{
                                 do {
@@ -202,6 +219,50 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
         })
         
+    }
+    
+    func findLocation(garage: Garage){
+        //Get the persistent container
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        //Forward Geocode garage location
+        let request = MKLocalSearchRequest()
+        request.naturalLanguageQuery = garage.name! + Constants.City
+        let search = MKLocalSearch(request: request)
+        search.start(completionHandler: {(response, error) in
+            //Use first location returned, if any
+            guard let mapItem = response?.mapItems[0] else{
+                
+                sendAlert(self, message: "Location not found!")
+                return
+            }
+            DispatchQueue.main.sync {
+                //Create Pin for garage location
+                let newPin = Pin(entity: Pin.entity(), insertInto: context)
+                newPin.garage = garage
+                newPin.latitude = mapItem.placemark.coordinate.latitude
+                newPin.longitude = mapItem.placemark.coordinate.longitude
+                self.storedPins.append(newPin)
+                print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
+                //Create map annotation for display
+                let annotation = MKPointAnnotation()
+                annotation.coordinate.latitude = newPin.latitude
+                annotation.coordinate.longitude = newPin.longitude
+                annotation.title = garage.name
+                self.annotations.append(annotation)
+                do {
+                    print("saving context")
+                    try context.save()
+                } catch {
+                    let nserror = error as NSError
+                    print("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
+
+            }
+            
+            
+        })
+ 
     }
 
     

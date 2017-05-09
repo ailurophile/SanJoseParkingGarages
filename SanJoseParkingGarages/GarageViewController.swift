@@ -29,9 +29,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         mapView.centerCoordinate = CLLocationCoordinate2DMake(Constants.MapCenterLatitude, Constants.MapCenterLongitude)
         let center = CLLocationCoordinate2DMake(Constants.MapCenterLatitude, Constants.MapCenterLongitude)
         let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)
-//        let region = MKCoordinateRegionMakeWithDistance(center, Constants.LatDelta, Constants.LonDelta)
-        mapView.region.span = span
-//        mapView.setRegion(region, animated: true)
+        let region = MKCoordinateRegionMake(center, span)
+//        mapView.region.span = span
+        mapView.setRegion(region, animated: true)
         //Load garage data from Core Data
         loadGarages()
         //Load Pins and add to map
@@ -58,23 +58,20 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //Animate Activity Indicator
         activityIndicator.startAnimating()
         JunarClient.sharedInstance().queryJunar(completionHandlerForQuery: {(results, error) in
-            
+            DispatchQueue.main.async {
+                self.activityIndicator.stopAnimating()
+            }
             guard error == nil else{
                 print(error?.localizedDescription ?? "?? no localized description to print")
                 notifyUser(self, message: "Error: \(error!.localizedDescription)")
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                }
+                
 
                 return
             }
             //Load garage dictionary
             guard let data = results as! [String: Any]? else{
                 notifyUser(self, message: "No garage data!")
-                DispatchQueue.main.async {
-                    self.activityIndicator.stopAnimating()
-                    
-                }
+                
                 return
             }
             //["Garage_Name","Garage_Status","Available_Visitor_Spaces","Total_Visitor_Spaces"]
@@ -83,6 +80,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
+//                garageArrays.removeFirst()  //remove column headings for web page
                 //check if more garages in Core Data than returned from API
                 if self.garageObjects.count > garageArrays.count {
                     print("old garages hanging around!  clearing out database")
@@ -90,7 +88,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     //Clear all objects from Core Data
                     DispatchQueue.main.sync {
                         for object in self.garageObjects{
-                            context.delete(object as! NSManagedObject)
+                            context.delete(object as NSManagedObject)
                         }
                         do {
                             print("saving context")
@@ -144,7 +142,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             search.start(completionHandler: {(response, error) in
                                 //Use first location returned, if any
                                 guard let mapItem = response?.mapItems[0] else{
-                                    self.activityIndicator.stopAnimating()
+                                    
                                     sendAlert(self, message: "Location not found!")
                                     return
                                 }
@@ -159,6 +157,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                 let annotation = MKPointAnnotation()
                                 annotation.coordinate.latitude = newPin.latitude
                                 annotation.coordinate.longitude = newPin.longitude
+                                annotation.title = newGarage.name
                                 self.annotations.append(annotation)
                                 
                             })
@@ -199,7 +198,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 notifyUser(self, message: "No results key found in garage data!")
  
             }
-            self.activityIndicator.stopAnimating()
+            
 
         })
         
@@ -223,6 +222,35 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return garageObjects.count
     }
  //MARK: Map methods
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .purple
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+
+    
+    // This delegate method is implemented to respond to taps. I
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            
+            //TBD present view controller with button to go to maps for directions
+        }
+    }
+
     private func addAnnotationsToMap(){
         
 
@@ -250,7 +278,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = mapView.centerCoordinate
         let span = mapView.region.span
-        print("map center: \(center) span: \(span)")
+        let region = mapView.region
+        print("map center: \(center) span: \(span) region: \(region)")
     }
 
 //MARK: Core Data methods
@@ -311,8 +340,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
     }
-    
-
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
 }
 
 

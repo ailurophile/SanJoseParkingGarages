@@ -34,25 +34,27 @@
                                 <rect key="frame" x="0.0" y="44" width="320" height="392"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Lao-3o-T0z">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="MbB-Ys-1kE"/>
+                                            <constraint firstAttribute="height" constant="140" id="MbB-Ys-1kE"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="egG-Kl-y51"/>
                                         </connections>
                                     </mapView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jsd-WL-xdx">
-                                        <rect key="frame" x="96" y="150" width="128" height="0.0"/>
+                                        <rect key="frame" x="96" y="140" width="128" height="0.0"/>
                                         <state key="normal" title="Location Reminder"/>
+                                        <connections>
+                                            <segue destination="eDi-PY-3o3" kind="show" id="Kys-tW-iQk"/>
+                                        </connections>
                                     </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wSJ-yg-mQD">
+                                        <rect key="frame" x="150" y="140" width="20" height="10"/>
+                                    </activityIndicatorView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-by-Ovr">
                                         <rect key="frame" x="0.0" y="150" width="320" height="242"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" id="wSJ-yg-mQD">
-                                            <rect key="frame" x="0.0" y="72" width="320" height="20"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </activityIndicatorView>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GarageTableCell" id="brZ-u3-fK7" userLabel="GarageTableCell" customClass="GarageTableCell" customModule="SanJoseParkingGarages" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
@@ -141,6 +143,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="417" y="177"/>
+        </scene>
+        <!--Location View Controller-->
+        <scene sceneID="lsl-sO-uRP">
+            <objects>
+                <viewController id="eDi-PY-3o3" customClass="LocationViewController" customModule="SanJoseParkingGarages" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="prk-QP-dOO"/>
+                        <viewControllerLayoutGuide type="bottom" id="OaH-g7-uSO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ifw-55-nim">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
+                                <rect key="frame" x="47" y="83" width="226" height="314"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
+                                        <rect key="frame" x="89.5" y="0.0" width="47" height="137"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveButtonPressed:" destination="eDi-PY-3o3" eventType="touchUpInside" id="1Ig-ZE-rWx"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
+                                        <rect key="frame" x="0.0" y="137" width="226" height="177"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="1TJ-cY-W25" secondAttribute="bottom" id="AD2-o3-xWk"/>
+                                    <constraint firstItem="b5B-qK-LI7" firstAttribute="top" secondItem="me4-fX-SI0" secondAttribute="top" id="SFZ-xb-UQ0"/>
+                                    <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="me4-fX-SI0" secondAttribute="leading" id="cXb-JA-rEK"/>
+                                    <constraint firstAttribute="trailing" secondItem="1TJ-cY-W25" secondAttribute="trailing" id="kwD-m3-Vst"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="0.43840967465753422" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="leading" secondItem="ifw-55-nim" secondAttribute="leadingMargin" constant="31" id="SiV-Yj-lSf"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerY" secondItem="ifw-55-nim" secondAttribute="centerY" id="Tqb-ft-pdT"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerX" secondItem="ifw-55-nim" secondAttribute="centerX" id="j1I-OE-SEv"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" constant="19" id="s01-gC-GeJ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="1TJ-cY-W25" id="U1z-hq-laQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tw8-ki-A6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1177.5" y="180"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LaU-Ii-txe">

@@ -18,6 +18,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var annotations = [MKAnnotation]()
     var numberOfPinsOnMap = 0
     var time:NSDate!
+    var desiredLocation: CLLocationCoordinate2D!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
@@ -30,7 +31,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let center = CLLocationCoordinate2DMake(Constants.MapCenterLatitude, Constants.MapCenterLongitude)
         let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)
         let region = MKCoordinateRegionMake(center, span)
-//        mapView.region.span = span
         mapView.setRegion(region, animated: true)
         //Load garage data from Core Data
         loadGarages()
@@ -116,7 +116,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         garageObject.open = open
                         garageObject.timestamp = self.time
                         if garageObject.pin == nil{
-                            self.findLocation(garage: garageObject)
+//                            self.findLocation(garage: garageObject)
                         }
                     }
                     //Create new Garage object
@@ -139,8 +139,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             newGarage.timestamp = self.time
                             self.garageObjects.append(newGarage)
                             
-                            self.findLocation(garage: newGarage)
-                            /*
+//                            self.findLocation(garage: newGarage)
+                            
                             //Forward Geocode garage location
                             let request = MKLocalSearchRequest()
                             request.naturalLanguageQuery = garage[Index.Name] + Constants.City
@@ -176,7 +176,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
                                 
                             })
-                            */
+                            
  
                           /*
                             if context.hasChanges{
@@ -269,6 +269,12 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
 // MARK: TableView Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let pin = garageObjects[indexPath.row].pin else{
+            sendAlert(self, message: "No location data for this garage")
+            return
+        }
+        let coordinates = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
+        showSelectedGarage(coordinates: coordinates)
         return
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -310,6 +316,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if control == view.rightCalloutAccessoryView {
             
             //TBD present view controller with button to go to maps for directions
+            let coordinates = view.annotation?.coordinate
+            showSelectedGarage(coordinates: coordinates!)
         }
     }
 
@@ -343,7 +351,19 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let region = mapView.region
         print("map center: \(center) span: \(span) region: \(region)")
     }
-
+//MARK: navigation methods
+    func showSelectedGarage(coordinates: CLLocationCoordinate2D){
+        desiredLocation = coordinates
+        performSegue(withIdentifier: "directions", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "directions" {
+            let nextController = segue.destination as! DirectionsViewController
+            nextController.targetGarage = desiredLocation
+        }
+    }
 //MARK: Core Data methods
     func getPin(for coordinate: CLLocationCoordinate2D) -> Pin? {
         for pin in storedPins{

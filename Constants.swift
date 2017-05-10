@@ -43,3 +43,10 @@ struct Index {
 struct Status {
     static let Open = "Open"
 }
+
+struct Keys {
+
+    static let Not1stLaunch = "hasLaunchedBefore"
+    static let TextViewClears = "preferredTextViewBehavior"
+    static let LocationReminder = "locationReminder"
+}

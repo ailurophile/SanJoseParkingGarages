@@ -103,7 +103,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     //clear all objects from local memory
                     self.garageObjects.removeAll()
                     self.storedPins.removeAll()
-                    self.annotations.removeAll()
+//                    self.annotations.removeAll()
                 }
                 self.time = NSDate() //for use as timestamp for invalidating data
                 
@@ -116,7 +116,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         garageObject.open = open
                         garageObject.timestamp = self.time
                         if garageObject.pin == nil{
-//                            self.findLocation(garage: garageObject)
+                            self.findLocation(garage: garageObject)
                         }
                     }
                     //Create new Garage object

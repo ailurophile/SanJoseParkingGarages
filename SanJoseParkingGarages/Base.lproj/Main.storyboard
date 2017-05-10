@@ -34,7 +34,7 @@
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="egG-Kl-y51"/>
                                         </connections>
                                     </mapView>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jsd-WL-xdx">
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jsd-WL-xdx">
                                         <rect key="frame" x="96" y="140" width="128" height="30"/>
                                         <state key="normal" title="Location Reminder"/>
                                         <connections>
@@ -147,45 +147,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="6tP-4v-neU">
-                                <rect key="frame" x="0.0" y="30" width="320" height="538"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MFa-JS-gTj">
+                                <rect key="frame" x="16" y="64" width="288" height="460"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riz-qm-mgO">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riz-qm-mgO">
+                                        <rect key="frame" x="0.0" y="0.0" width="288" height="35"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                         <state key="normal" title="Get Directions Via Maps"/>
                                         <connections>
                                             <action selector="getDirections:" destination="Gvk-4N-2ru" eventType="touchUpInside" id="Evf-KA-mWQ"/>
                                         </connections>
                                     </button>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LBU-kV-ZfR">
-                                        <rect key="frame" x="0.0" y="41" width="320" height="497"/>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qd2-xc-2o6">
+                                        <rect key="frame" x="0.0" y="35" width="288" height="425"/>
                                     </mapView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="LBU-kV-ZfR" secondAttribute="trailing" id="AXB-cE-uZO"/>
-                                    <constraint firstItem="riz-qm-mgO" firstAttribute="leading" secondItem="6tP-4v-neU" secondAttribute="leading" id="Hv7-1l-7R9"/>
-                                    <constraint firstAttribute="bottom" secondItem="LBU-kV-ZfR" secondAttribute="bottom" id="X04-Xx-1Z3"/>
-                                    <constraint firstAttribute="trailing" secondItem="riz-qm-mgO" secondAttribute="trailing" id="krh-Hq-8DX"/>
-                                    <constraint firstItem="LBU-kV-ZfR" firstAttribute="leading" secondItem="6tP-4v-neU" secondAttribute="leading" id="wb9-LZ-ARW"/>
+                                    <constraint firstAttribute="trailing" secondItem="riz-qm-mgO" secondAttribute="trailing" id="4VJ-mB-BcZ"/>
+                                    <constraint firstItem="riz-qm-mgO" firstAttribute="leading" secondItem="MFa-JS-gTj" secondAttribute="leading" id="Ut5-sL-JLE"/>
+                                    <constraint firstItem="Qd2-xc-2o6" firstAttribute="top" secondItem="riz-qm-mgO" secondAttribute="bottom" id="aBa-bn-Zmo"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qd2-xc-2o6" secondAttribute="bottom" id="hFd-Bf-Izn"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qd2-xc-2o6" secondAttribute="trailing" id="msj-0V-Fql"/>
+                                    <constraint firstItem="Qd2-xc-2o6" firstAttribute="leading" secondItem="MFa-JS-gTj" secondAttribute="leading" id="xTu-I8-w52"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="6tP-4v-neU" secondAttribute="trailing" id="a7f-AH-Mng"/>
-                            <constraint firstItem="6tP-4v-neU" firstAttribute="leading" secondItem="2F0-cU-fLE" secondAttribute="leading" id="nbL-kJ-52Z"/>
-                            <constraint firstItem="7rP-GG-RDq" firstAttribute="top" secondItem="6tP-4v-neU" secondAttribute="bottom" id="ohH-Bs-LJA"/>
-                            <constraint firstItem="6tP-4v-neU" firstAttribute="top" secondItem="8pn-U0-Z6f" secondAttribute="bottom" constant="10" id="pl6-1D-lr1"/>
+                            <constraint firstItem="MFa-JS-gTj" firstAttribute="top" secondItem="8pn-U0-Z6f" secondAttribute="bottom" id="7bu-0J-lw5"/>
+                            <constraint firstItem="7rP-GG-RDq" firstAttribute="top" secondItem="MFa-JS-gTj" secondAttribute="bottom" id="QvL-lk-hzt"/>
+                            <constraint firstItem="MFa-JS-gTj" firstAttribute="leading" secondItem="2F0-cU-fLE" secondAttribute="leadingMargin" id="e7U-Mc-laA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MFa-JS-gTj" secondAttribute="trailing" id="hqa-9I-hwG"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mapView" destination="LBU-kV-ZfR" id="Qgg-1c-q95"/>
+                        <outlet property="mapView" destination="Qd2-xc-2o6" id="59j-5z-eMh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aha-RB-h9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1178" y="-601"/>
+            <point key="canvasLocation" x="1164" y="-600"/>
         </scene>
         <!--Location View Controller-->
         <scene sceneID="lsl-sO-uRP">
@@ -199,47 +200,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
                                 <rect key="frame" x="47" y="64" width="226" height="440"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
-                                        <rect key="frame" x="89.5" y="0.0" width="47" height="38"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
+                                        <rect key="frame" x="0.0" y="0.0" width="226" height="39.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="eDi-PY-3o3" eventType="touchUpInside" id="1Ig-ZE-rWx"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
-                                        <rect key="frame" x="0.0" y="44" width="226" height="396"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
+                                        <rect key="frame" x="0.0" y="45.5" width="226" height="355.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-eE-YOw">
+                                        <rect key="frame" x="0.0" y="407" width="226" height="33"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2E-b7-YaC" userLabel="Retain text label">
+                                                <rect key="frame" x="0.0" y="6" width="89" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iIl-UM-TMB">
+                                                <rect key="frame" x="89" y="1" width="51" height="31"/>
+                                            </switch>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohW-ae-7XT" userLabel="Clear text label">
+                                                <rect key="frame" x="138" y="6" width="88" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="iIl-UM-TMB" firstAttribute="centerX" secondItem="3VX-eE-YOw" secondAttribute="centerX" id="urH-Re-5X4"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="1TJ-cY-W25" secondAttribute="bottom" id="AD2-o3-xWk"/>
-                                    <constraint firstItem="b5B-qK-LI7" firstAttribute="top" secondItem="me4-fX-SI0" secondAttribute="top" id="SFZ-xb-UQ0"/>
-                                    <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="me4-fX-SI0" secondAttribute="leading" id="cXb-JA-rEK"/>
-                                    <constraint firstAttribute="trailing" secondItem="1TJ-cY-W25" secondAttribute="trailing" id="kwD-m3-Vst"/>
+                                    <constraint firstItem="b5B-qK-LI7" firstAttribute="leading" secondItem="me4-fX-SI0" secondAttribute="leading" id="9CD-nW-ils"/>
+                                    <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="3VX-eE-YOw" secondAttribute="leading" id="mYH-R5-NEY"/>
+                                    <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="me4-fX-SI0" secondAttribute="leading" id="oSu-3l-V0n"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="0.43840967465753422" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="leading" secondItem="ifw-55-nim" secondAttribute="leadingMargin" constant="31" id="SiV-Yj-lSf"/>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerY" secondItem="ifw-55-nim" secondAttribute="centerY" id="Tqb-ft-pdT"/>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerX" secondItem="ifw-55-nim" secondAttribute="centerX" id="j1I-OE-SEv"/>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" id="s01-gC-GeJ"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerY" secondItem="ifw-55-nim" secondAttribute="centerY" id="0uN-BJ-rj7"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" id="sWv-Hx-m7f"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerX" secondItem="ifw-55-nim" secondAttribute="centerX" id="vqs-qB-AlN"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="leading" secondItem="ifw-55-nim" secondAttribute="leadingMargin" constant="31" id="xzz-co-r1f"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="textView" destination="1TJ-cY-W25" id="U1z-hq-laQ"/>
+                        <outlet property="locationTextView" destination="1TJ-cY-W25" id="6Fk-hi-jYt"/>
+                        <outlet property="textViewSwitch" destination="iIl-UM-TMB" id="FJr-Za-ecz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tw8-ki-A6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1177.5" y="180"/>
+            <point key="canvasLocation" x="1290" y="203"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LaU-Ii-txe">

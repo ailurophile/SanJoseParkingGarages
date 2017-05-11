@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        performOnFirstLaunch()
         return true
     }
 
@@ -88,6 +88,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func performOnFirstLaunch() {
+        if !UserDefaults.standard.bool(forKey: Keys.Not1stLaunch) {
+            let prefersTextClears = true
+            let initialText = "Enter reminder to help you locate your car when you return to the garage then select Save."
+            UserDefaults.standard.setValue(prefersTextClears, forKey: Keys.TextViewClears)
+            UserDefaults.standard.setValue(true, forKey: Keys.Not1stLaunch)
+            UserDefaults.standard.setValue(initialText, forKey: Keys.LocationReminder)
+            UserDefaults.standard.synchronize()
+        }
+    }
+
 
 }
 

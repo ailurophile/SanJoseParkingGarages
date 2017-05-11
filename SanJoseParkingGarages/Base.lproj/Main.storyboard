@@ -180,6 +180,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="MFa-JS-gTj" secondAttribute="trailing" id="hqa-9I-hwG"/>
                         </constraints>
                     </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="cUM-Q9-eqf">
+                        <barButtonItem key="rightBarButtonItem" title="Update location" id="IFJ-g8-ccm">
+                            <connections>
+                                <action selector="updateLocationButtonSelected:" destination="Gvk-4N-2ru" id="oJ8-tN-ZY6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="Qd2-xc-2o6" id="59j-5z-eMh"/>
                     </connections>
@@ -200,60 +208,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
-                                <rect key="frame" x="47" y="64" width="226" height="440"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
+                                <rect key="frame" x="47" y="63.5" width="226" height="441"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
-                                        <rect key="frame" x="0.0" y="0.0" width="226" height="39.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
+                                        <rect key="frame" x="0.0" y="0.0" width="226" height="45"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="saveButtonPressed:" destination="eDi-PY-3o3" eventType="touchUpInside" id="1Ig-ZE-rWx"/>
                                         </connections>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
-                                        <rect key="frame" x="0.0" y="45.5" width="226" height="355.5"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
+                                        <rect key="frame" x="0.0" y="51" width="226" height="353"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="143" id="jfz-26-BFV"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" verticalHuggingPriority="252" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-eE-YOw">
-                                        <rect key="frame" x="0.0" y="407" width="226" height="33"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-eE-YOw">
+                                        <rect key="frame" x="0.0" y="410" width="226" height="31"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2E-b7-YaC" userLabel="Retain text label">
-                                                <rect key="frame" x="0.0" y="6" width="89" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="1" width="89" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iIl-UM-TMB">
-                                                <rect key="frame" x="89" y="1" width="51" height="31"/>
+                                                <rect key="frame" x="89" y="0.0" width="51" height="31"/>
+                                                <connections>
+                                                    <action selector="locationTextSwitchSet:" destination="eDi-PY-3o3" eventType="valueChanged" id="Dnv-eW-zJ5"/>
+                                                </connections>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohW-ae-7XT" userLabel="Clear text label">
-                                                <rect key="frame" x="138" y="6" width="88" height="20.5"/>
+                                                <rect key="frame" x="138" y="1" width="88" height="29"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="iIl-UM-TMB" firstAttribute="centerX" secondItem="3VX-eE-YOw" secondAttribute="centerX" id="urH-Re-5X4"/>
+                                            <constraint firstItem="o2E-b7-YaC" firstAttribute="baseline" secondItem="ohW-ae-7XT" secondAttribute="baseline" id="EmB-68-dIw"/>
+                                            <constraint firstItem="iIl-UM-TMB" firstAttribute="top" relation="lessThanOrEqual" secondItem="3VX-eE-YOw" secondAttribute="top" constant="56" id="GVY-Yk-E4f"/>
+                                            <constraint firstItem="iIl-UM-TMB" firstAttribute="centerX" secondItem="3VX-eE-YOw" secondAttribute="centerX" id="UvA-YD-A0a"/>
+                                            <constraint firstItem="o2E-b7-YaC" firstAttribute="top" secondItem="3VX-eE-YOw" secondAttribute="top" constant="1" id="a3b-Sz-7V1"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="b5B-qK-LI7" firstAttribute="leading" secondItem="me4-fX-SI0" secondAttribute="leading" id="9CD-nW-ils"/>
-                                    <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="3VX-eE-YOw" secondAttribute="leading" id="mYH-R5-NEY"/>
-                                    <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="me4-fX-SI0" secondAttribute="leading" id="oSu-3l-V0n"/>
+                                    <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="3VX-eE-YOw" secondAttribute="leading" id="O8m-as-wIh"/>
+                                    <constraint firstItem="b5B-qK-LI7" firstAttribute="leading" secondItem="1TJ-cY-W25" secondAttribute="leading" id="WQs-DX-nam"/>
+                                    <constraint firstItem="b5B-qK-LI7" firstAttribute="leading" secondItem="me4-fX-SI0" secondAttribute="leading" id="wul-UK-Cqk"/>
                                 </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="0.43840967465753422" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerY" secondItem="ifw-55-nim" secondAttribute="centerY" id="0uN-BJ-rj7"/>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" id="sWv-Hx-m7f"/>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerX" secondItem="ifw-55-nim" secondAttribute="centerX" id="vqs-qB-AlN"/>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="leading" secondItem="ifw-55-nim" secondAttribute="leadingMargin" constant="31" id="xzz-co-r1f"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerX" secondItem="ifw-55-nim" secondAttribute="centerX" id="bTF-Vb-6n6"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="leading" secondItem="ifw-55-nim" secondAttribute="leadingMargin" constant="31" id="nkn-D7-cyt"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" id="wEx-JQ-7Nq"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="centerY" secondItem="ifw-55-nim" secondAttribute="centerY" id="xoI-1B-5M1"/>
                         </constraints>
                     </view>
                     <connections>
@@ -263,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tw8-ki-A6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1290" y="203"/>
+            <point key="canvasLocation" x="1277" y="202"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LaU-Ii-txe">

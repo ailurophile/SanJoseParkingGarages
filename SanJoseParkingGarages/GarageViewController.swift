@@ -40,11 +40,12 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         loadPins()
         //Get latest available data
         getParkingData()
+        /*
         //update map if new pins exist
         if annotations.count > numberOfPinsOnMap{
             addAnnotationsToMap()
         }
-        
+        */
 
     }
 
@@ -83,25 +84,26 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
 //                garageArrays.removeLast()  //remove garage so it will look like a garage has been sold
+                DispatchQueue.main.async {
                 //check if more garages in Core Data than returned from API
                 if self.garageObjects.count > garageArrays.count {
                     print("old garages hanging around!  clearing out database")
                     
                     //Clear all objects from Core Data
-                    DispatchQueue.main.async {
-                        for object in self.garageObjects{
-                            context.delete(object as NSManagedObject)
-                        }
-                        do {
-                            print("saving context")
-                            try context.save()
-                        } catch {
-                            let nserror = error as NSError
-                            print("Unresolved error \(nserror), \(nserror.userInfo)")
-                        }
+//                    DispatchQueue.main.async {
+                    for object in self.garageObjects{
+                        context.delete(object as NSManagedObject)
+                    }
+                    do {
+                        print("saving context")
+                        try context.save()
+                    } catch {
+                        let nserror = error as NSError
+                        print("Unresolved error \(nserror), \(nserror.userInfo)")
+                    }
 
                         
-                    }
+//                    }
                     //clear all objects from local memory
                     self.garageObjects.removeAll()
                     self.storedPins.removeAll()
@@ -126,58 +128,23 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     else{
                         
 
-                        DispatchQueue.main.async {
-                            let newGarage = Garage(entity: Garage.entity(), insertInto: context)
-                            //Leave the word "Garage" off of name if device has small screen
-                            if UIScreen.main.bounds.size.height < CGFloat(Constants.SmallScreenHeight){
-                                newGarage.name = garage[Index.Name].replacingOccurrences(of: "Garage", with: "")
-                            }
-                            else {
-                                newGarage.name = garage[Index.Name]
-                            }
-                            newGarage.open = open
-                            newGarage.spaces = garage[Index.Spaces]
-                            newGarage.capacity = garage[Index.Capacity]
-                            newGarage.timestamp = self.time
-                            self.garageObjects.append(newGarage)
-                            
-//                            self.findLocation(garage: newGarage)
-                            
-                            //Forward Geocode garage location
-                            let request = MKLocalSearchRequest()
-                            request.naturalLanguageQuery = garage[Index.Name] + Constants.City
-                            let search = MKLocalSearch(request: request)
-                            search.start(completionHandler: {(response, error) in
-                                //Use first location returned, if any
-                                guard let mapItem = response?.mapItems[0] else{
-                                    
-                                    sendAlert(self, message: "Location not found!")
-                                    return
-                                }
-                                //Create Pin for garage location
-                                let newPin = Pin(entity: Pin.entity(), insertInto: context)
-                                newPin.garage = newGarage
-                                newPin.latitude = mapItem.placemark.coordinate.latitude
-                                newPin.longitude = mapItem.placemark.coordinate.longitude
-                                self.storedPins.append(newPin)
-                                print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
-                                //Create map annotation for display
-                                let annotation = MKPointAnnotation()
-                                annotation.coordinate.latitude = newPin.latitude
-                                annotation.coordinate.longitude = newPin.longitude
-                                annotation.title = newGarage.name
-                                self.annotations.append(annotation)
-                                self.addAnnotationsToMap()
-                                do {
-                                    print("saving context")
-                                    try context.save()
-                                } catch {
-                                    let nserror = error as NSError
-                                    print("Unresolved error \(nserror), \(nserror.userInfo)")
-                                }
+//                        DispatchQueue.main.async {
+                        let newGarage = Garage(entity: Garage.entity(), insertInto: context)
+                        //Leave the word "Garage" off of name if device has small screen
+                        if UIScreen.main.bounds.size.height < CGFloat(Constants.SmallScreenHeight){
+                            newGarage.name = garage[Index.Name].replacingOccurrences(of: "Garage", with: "")
+                        }
+                        else {
+                            newGarage.name = garage[Index.Name]
+                        }
+                        newGarage.open = open
+                        newGarage.spaces = garage[Index.Spaces]
+                        newGarage.capacity = garage[Index.Capacity]
+                        newGarage.timestamp = self.time
+                        self.garageObjects.append(newGarage)
+                        
+                        self.findLocation(garage: newGarage)
 
-                                
-                            })
                             
  
                           /*
@@ -193,12 +160,13 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
                          */
                             
-                        }
+//                        }
                     }
                 }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData() // show latest data on table
-
+//                DispatchQueue.main.async {
+                self.tableView.reloadData() // show latest data on table
+                delegate.saveContext()
+/*
                     if context.hasChanges{
                         do {
                             print("saving context")
@@ -208,7 +176,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             print("Unresolved error \(nserror), \(nserror.userInfo)")
                         }
                     }
-                    
+                   */
                 }
                 
             }
@@ -253,6 +221,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 annotation.title = garage.name
                 self.annotations.append(annotation)
                 self.addAnnotationsToMap()
+                delegate.saveContext()
+                /*
                 do {
                     print("saving context")
                     try context.save()
@@ -260,6 +230,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let nserror = error as NSError
                     print("Unresolved error \(nserror), \(nserror.userInfo)")
                 }
+ */
 
             }
             

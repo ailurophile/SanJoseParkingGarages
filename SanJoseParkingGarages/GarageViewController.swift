@@ -19,6 +19,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var numberOfPinsOnMap = 0
     var time:NSDate!
     var desiredLocation: CLLocationCoordinate2D!
+    var destinationName = Constants.DefaultGarageName
+    
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
@@ -274,14 +276,17 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             return
         }
         let coordinates = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
-        showSelectedGarage(coordinates: coordinates)
+        let name = garageObjects[indexPath.row].name
+        showSelectedGarage(coordinates: coordinates, title: name)
         return
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "GarageTableCell", for: indexPath) as! GarageTableCell
         cell.nameLabel?.text = garageObjects[indexPath.row].name
         cell.spacesLabel?.text = garageObjects[indexPath.row].open ? garageObjects[indexPath.row].spaces:"closed"
-        //TBD Replace with -- if stale
+        if isStale(timestamp: garageObjects[indexPath.row].timestamp!){
+            cell.spacesLabel?.text = Constants.StaleData
+        }
         cell.capacityLabel?.text = garageObjects[indexPath.row].capacity
         
         return cell
@@ -317,7 +322,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             //TBD present view controller with button to go to maps for directions
             let coordinates = view.annotation?.coordinate
-            showSelectedGarage(coordinates: coordinates!)
+            let name = getPin(for: coordinates!)?.garage?.name
+            showSelectedGarage(coordinates: coordinates!, title: name)
         }
     }
 
@@ -352,8 +358,14 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("map center: \(center) span: \(span) region: \(region)")
     }
 //MARK: navigation methods
-    func showSelectedGarage(coordinates: CLLocationCoordinate2D){
+    func showSelectedGarage(coordinates: CLLocationCoordinate2D, title: String?){
         desiredLocation = coordinates
+        if let name = title {
+            destinationName = name
+        }
+        else {
+            destinationName = Constants.DefaultGarageName
+        }
         performSegue(withIdentifier: "directions", sender: self)
         
     }
@@ -362,11 +374,12 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if segue.identifier == "directions" {
             let nextController = segue.destination as! DirectionsViewController
             nextController.targetGarage = desiredLocation
+            nextController.garageName = destinationName
         }
     }
 //MARK: Core Data methods
     func getPin(for coordinate: CLLocationCoordinate2D) -> Pin? {
-        for pin in storedPins{
+        for pin in storedPins {
             if pin.latitude == coordinate.latitude && pin.longitude == coordinate.longitude{
                 return pin
             }
@@ -387,7 +400,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let delegate = UIApplication.shared.delegate as! AppDelegate
         //Create fetch request
         let fetchRequest = NSFetchRequest<Garage>(entityName: "Garage")
-        fetchRequest.sortDescriptors = [NSSortDescriptor(key: GarageProperties.Spaces, ascending: true)]
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: GarageProperties.Name, ascending: true)]
         do {
             let results = try delegate.persistentContainer.viewContext.fetch(fetchRequest)
             garageObjects = results
@@ -421,6 +434,14 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         addAnnotationsToMap()
         
         
+    }
+    //Check if data too old to be useful to display in table
+    func isStale(timestamp: NSDate)->Bool{
+        print("timeIntervalSinceNow = \(timestamp.timeIntervalSinceNow)")
+        if timestamp.timeIntervalSinceNow < Constants.ParkingDataExpiration { //negative values hence the less than sign
+            return true
+        }
+        return false
     }
     deinit {
         NotificationCenter.default.removeObserver(self)

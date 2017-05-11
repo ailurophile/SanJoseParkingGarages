@@ -9,10 +9,11 @@
 import Foundation
 import UIKit
 import  MapKit
+import AddressBook
 
 class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var targetGarage: CLLocationCoordinate2D!
-    var garageName = "Garage"
+    var garageName = Constants.DefaultGarageName
     let locationManager = CLLocationManager()
     let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
 //    var span: MKCoordinateSpan!
@@ -35,10 +36,32 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         //show garage and user if location services enabled
         let annotation = MKPointAnnotation()
         annotation.coordinate = targetGarage
+        annotation.title = garageName
         setDefaultSpan()
         mapView.addAnnotation(annotation)
     }
-    //MARK: Location Manager delegate methods
+
+    //MARK: Map methods
+/*    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinTintColor = .purple
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+ */
+
     func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
         sendAlert(self, message: "Unable to find current location!")
     }
@@ -60,6 +83,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
 
         }
     }
+    //MARK: Location Manager delegate methods
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         sendAlert(self, message: "Location Manager unsuccessful")
     }
@@ -68,7 +92,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         let myCoordinates = CLLocationCoordinate2D(latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude)
         let myAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = myCoordinates
-        mapView.addAnnotation(myAnnotation)
+//        mapView.addAnnotation(myAnnotation)
     }
     func setDefaultSpan(){
         let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)
@@ -83,8 +107,8 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     @IBAction func getDirections(_ sender: Any) {
 
         let placemark = MKPlacemark(coordinate: targetGarage)
-//        placemark.setValue(garageName, forKey: "title")
         let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = garageName
         mapItem.openInMaps(launchOptions: launchOptions)
     }
 }

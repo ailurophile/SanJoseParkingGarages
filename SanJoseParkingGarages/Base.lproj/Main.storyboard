@@ -127,6 +127,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="wSJ-yg-mQD" id="BQH-xG-96o"/>
                         <outlet property="mapView" destination="Lao-3o-T0z" id="1Tu-ag-bbb"/>
+                        <outlet property="refreshButton" destination="x0G-Jd-QGN" id="4JG-pc-cYx"/>
                         <outlet property="tableView" destination="tiQ-by-Ovr" id="atg-1r-Ltz"/>
                         <segue destination="Gvk-4N-2ru" kind="show" identifier="directions" id="XIY-bt-Tgi"/>
                     </connections>

@@ -18,12 +18,13 @@ struct Constants {
     static let ParkingDataExpiration = -1800.0 //30 minutes to stale
     static let MapDataExpiration = -86400.0 //24 hours to stale
     static let City = "San Jose, CA"
-    static let MapCenterLatitude = 37.326758739542825
-    static let MapCenterLongitude = -121.84566744830443
-    static let LatDelta = 0.07098181195248543
-    static let LonDelta = 0.25749208904997545
+    static let MapCenterLatitude = 37.33756108554114
+    static let MapCenterLongitude = -121.8878410859226
+    static let LatDelta = 0.019108101105551611
+    static let LonDelta = 0.071067820396351067
     static let StaleData = "?"
     static let DefaultGarageName = "Garage"
+
 }
 
 struct GarageProperties {
@@ -45,10 +46,13 @@ struct Index {
 struct Status {
     static let Open = "Open"
 }
-
+//User Defaults keys and dictionary keys
 struct Keys {
 
     static let Not1stLaunch = "hasLaunchedBefore"
     static let TextViewClears = "preferredTextViewBehavior"
     static let LocationReminder = "locationReminder"
+    static let Latitude = "lat"
+    static let Longitude = "lon"
 }
+ 

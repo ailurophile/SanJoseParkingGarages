@@ -20,10 +20,19 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var time:NSDate!
     var desiredLocation: CLLocationCoordinate2D!
     var destinationName = Constants.DefaultGarageName
-    
-    
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    let KnownGarages = [
+        "Convention Center Garage": [Keys.Latitude: 37.329477, Keys.Longitude: -121.8892573],
+        "Fourth Street Garage": [Keys.Latitude: 37.33695030, Keys.Longitude: -121.88615870],
+        "Second San Carlos Garage": [Keys.Latitude: 37.3325201, Keys.Longitude: -121.8879675]
+        
+    ]
+    //"Third Street Garage": [Keys.Latitude: 37.3361777, Keys.Longitude: -121.8950256],
+    //        "City Hall Garage": [Keys.Latitude: 37.3377472, Keys.Longitude: -121.8871468],
+    //        "Market San Pedro Square Garage": [Keys.Latitude: 37.3361778, Keys.Longitude: -121.8950148 ],
+    //        "Fourth Street Garage": [Keys.Latitude: 37.3363783, Keys.Longitude: -121.8881668],
 
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
@@ -40,12 +49,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         loadPins()
         //Get latest available data
         getParkingData()
-        /*
-        //update map if new pins exist
-        if annotations.count > numberOfPinsOnMap{
-            addAnnotationsToMap()
-        }
-        */
+        //Register for notifications
+        NotificationCenter.default.addObserver(self, selector: #selector(getParkingData), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+
 
     }
 
@@ -55,11 +61,13 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @IBAction func RefreshButtonSelected(_ sender: Any) {
+        
         getParkingData()
     }
     func getParkingData(){
         //Animate Activity Indicator
         activityIndicator.startAnimating()
+        refreshButton.isEnabled = false
         JunarClient.sharedInstance().queryJunar(completionHandlerForQuery: {(results, error) in
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
@@ -83,31 +91,22 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
-//                garageArrays.removeLast()  //remove garage so it will look like a garage has been sold
+//                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
                 DispatchQueue.main.async {
                 //check if more garages in Core Data than returned from API
                 if self.garageObjects.count > garageArrays.count {
                     print("old garages hanging around!  clearing out database")
                     
                     //Clear all objects from Core Data
-//                    DispatchQueue.main.async {
                     for object in self.garageObjects{
                         context.delete(object as NSManagedObject)
                     }
-                    do {
-                        print("saving context")
-                        try context.save()
-                    } catch {
-                        let nserror = error as NSError
-                        print("Unresolved error \(nserror), \(nserror.userInfo)")
-                    }
+                    delegate.saveContext()
 
-                        
-//                    }
                     //clear all objects from local memory
                     self.garageObjects.removeAll()
                     self.storedPins.removeAll()
-//                    self.annotations.removeAll()
+                    self.annotations.removeAll()
                 }
                 self.time = NSDate() //for use as timestamp for invalidating data
                 
@@ -127,8 +126,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         
                     else{
                         
-
-//                        DispatchQueue.main.async {
                         let newGarage = Garage(entity: Garage.entity(), insertInto: context)
                         //Leave the word "Garage" off of name if device has small screen
                         if UIScreen.main.bounds.size.height < CGFloat(Constants.SmallScreenHeight){
@@ -142,102 +139,81 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                         newGarage.capacity = garage[Index.Capacity]
                         newGarage.timestamp = self.time
                         self.garageObjects.append(newGarage)
-                        
                         self.findLocation(garage: newGarage)
 
                             
- 
-                          /*
-                            if context.hasChanges{
-                                do {
-                                    print("saving context")
-                                    try context.save()
-                                } catch {
-                                    let nserror = error as NSError
-                                    print("Unresolved error \(nserror), \(nserror.userInfo)")
-                                }
-                            }
-
-                         */
-                            
-//                        }
-                    }
+                     }
                 }
-//                DispatchQueue.main.async {
+
                 self.tableView.reloadData() // show latest data on table
                 delegate.saveContext()
-/*
-                    if context.hasChanges{
-                        do {
-                            print("saving context")
-                            try context.save()
-                        } catch {
-                            let nserror = error as NSError
-                            print("Unresolved error \(nserror), \(nserror.userInfo)")
-                        }
-                    }
-                   */
+                self.refreshButton.isEnabled = true
+
                 }
                 
             }
                 
             else {
                 notifyUser(self, message: "No results key found in garage data!")
+                self.refreshButton.isEnabled = true
  
             }
-            
 
         })
         
     }
     
     func findLocation(garage: Garage){
-        //Get the persistent container
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
+        
+        if KnownGarages.keys.contains(garage.name!){
+//            print("found garage named: \(garage.name)")
+            let coordinates = KnownGarages[garage.name!]
+            let coordinate = CLLocationCoordinate2D(latitude: (coordinates?[Keys.Latitude])!, longitude: (coordinates?[Keys.Longitude])!)
+            createPin(relatedTo: garage, at: coordinate)
+        }
+        else{
         //Forward Geocode garage location
-        let request = MKLocalSearchRequest()
-        request.naturalLanguageQuery = garage.name! + Constants.City
-        let search = MKLocalSearch(request: request)
-        search.start(completionHandler: {(response, error) in
-            //Use first location returned, if any
-            guard let mapItem = response?.mapItems[0] else{
-                
-                sendAlert(self, message: "Location not found!")
-                return
-            }
-            DispatchQueue.main.async {
-                //Create Pin for garage location
-                let newPin = Pin(entity: Pin.entity(), insertInto: context)
-                newPin.garage = garage
-                newPin.latitude = mapItem.placemark.coordinate.latitude
-                newPin.longitude = mapItem.placemark.coordinate.longitude
-                self.storedPins.append(newPin)
-                print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
-                //Create map annotation for display
-                let annotation = MKPointAnnotation()
-                annotation.coordinate.latitude = newPin.latitude
-                annotation.coordinate.longitude = newPin.longitude
-                annotation.title = garage.name
-                self.annotations.append(annotation)
-                self.addAnnotationsToMap()
-                delegate.saveContext()
-                /*
-                do {
-                    print("saving context")
-                    try context.save()
-                } catch {
-                    let nserror = error as NSError
-                    print("Unresolved error \(nserror), \(nserror.userInfo)")
+//            print("searching for garage location of : \(garage.name)")
+            let request = MKLocalSearchRequest()
+            request.naturalLanguageQuery = garage.name! + Constants.City
+            let search = MKLocalSearch(request: request)
+            search.start(completionHandler: {(response, error) in
+                //Use first location returned, if any
+                guard let mapItem = response?.mapItems[0] else{
+                    
+                    sendAlert(self, message: "Location not found!")
+                    return
                 }
- */
-
-            }
-            
-            
-        })
+                let coordinate = mapItem.placemark.coordinate
+                self.createPin(relatedTo: garage, at: coordinate)
+            })
  
+        }
+        
     }
+    func createPin(relatedTo garage:Garage, at coordinate:CLLocationCoordinate2D){
+        DispatchQueue.main.async {
+            //Get the persistent container
+            let delegate = UIApplication.shared.delegate as! AppDelegate
+            let context = delegate.persistentContainer.viewContext
+            //Create Pin for garage location
+            let newPin = Pin(entity: Pin.entity(), insertInto: context)
+            newPin.garage = garage
+            newPin.latitude = coordinate.latitude
+            newPin.longitude = coordinate.longitude
+            self.storedPins.append(newPin)
+//            print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
+            //Create map annotation for display
+            let annotation = MKPointAnnotation()
+            annotation.coordinate.latitude = newPin.latitude
+            annotation.coordinate.longitude = newPin.longitude
+            annotation.title = garage.name
+            self.annotations.append(annotation)
+            self.addAnnotationsToMap()
+            delegate.saveContext()
+        }
+    }
+    
 
     
 // MARK: TableView Delegate
@@ -322,12 +298,12 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         
     }
-    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+/*    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         let center = mapView.centerCoordinate
         let span = mapView.region.span
         let region = mapView.region
         print("map center: \(center) span: \(span) region: \(region)")
-    }
+    }*/
 //MARK: navigation methods
     func showSelectedGarage(coordinates: CLLocationCoordinate2D, title: String?){
         desiredLocation = coordinates
@@ -366,7 +342,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         return nil  //no garage by that name in Core Data
     }
-    @objc private func loadGarages(){
+    //Must be call from main
+    private func loadGarages(){
         //Get the persistent container
         let delegate = UIApplication.shared.delegate as! AppDelegate
         //Create fetch request
@@ -375,13 +352,13 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         do {
             let results = try delegate.persistentContainer.viewContext.fetch(fetchRequest)
             garageObjects = results
-            print("Number of garages loaded = \(results.count)")
+//            print("Number of garages loaded = \(results.count)")
         } catch let error as NSError {
             print("Could not fetch Garages. \(error), \(error.userInfo)")
         }
     }
-    // Load Pins from Core Data and display on map
-    @objc private func loadPins(){
+    // Load Pins from Core Data and display on map (must be called from main)
+    private func loadPins(){
         //Get the persistent container
         let delegate = UIApplication.shared.delegate as! AppDelegate
         //Create fetch request
@@ -390,15 +367,16 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         do {
             let results = try delegate.persistentContainer.viewContext.fetch(fetchRequest) 
             for pin in results{
-             print("pin at coordinates: \(pin.latitude),\(pin.longitude)")
+//             print("pin at coordinates: \(pin.latitude),\(pin.longitude)")
                 //Create map annotation for display
                 let annotation = MKPointAnnotation()
                 annotation.coordinate.latitude = pin.latitude
                 annotation.coordinate.longitude = pin.longitude
+                annotation.title = pin.garage?.name
                 self.annotations.append(annotation)
              }
             storedPins = results
-            print("Number of pins loaded = \(results.count)")
+//            print("Number of pins loaded = \(results.count)")
         } catch let error as NSError {
             print("Could not fetch Pins. \(error), \(error.userInfo)")
         }
@@ -408,7 +386,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     //Check if data too old to be useful to display in table
     func isStale(timestamp: NSDate)->Bool{
-        print("timeIntervalSinceNow = \(timestamp.timeIntervalSinceNow)")
+//        print("timeIntervalSinceNow = \(timestamp.timeIntervalSinceNow)")
         if timestamp.timeIntervalSinceNow < Constants.ParkingDataExpiration { //negative values hence the less than sign
             return true
         }

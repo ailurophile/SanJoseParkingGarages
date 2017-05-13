@@ -14,7 +14,7 @@ struct PinProperties {
 
 }
 struct Constants {
-    static let SmallScreenHeight = 500.0
+    static let SmallScreenWidth = 330.0
     static let ParkingDataExpiration = -1800.0 //30 minutes to stale
     static let MapDataExpiration = -86400.0 //24 hours to stale
     static let City = "San Jose, CA"

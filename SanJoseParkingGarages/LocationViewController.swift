@@ -50,6 +50,7 @@ class LocationViewController: UIViewController, UITextViewDelegate{
     @IBAction func saveButtonPressed(_ sender: Any) {
         UserDefaults.standard.setValue(locationTextView.text, forKey: Keys.LocationReminder)
         UserDefaults.standard.synchronize()
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func locationTextSwitchSet(_ sender: Any) {

@@ -21,15 +21,16 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var desiredLocation: CLLocationCoordinate2D!
     var destinationName = Constants.DefaultGarageName
     let KnownGarages = [
-        "Convention Center Garage": [Keys.Latitude: 37.329477, Keys.Longitude: -121.8892573],
-        "Fourth Street Garage": [Keys.Latitude: 37.33695030, Keys.Longitude: -121.88615870],
-        "Second San Carlos Garage": [Keys.Latitude: 37.3325201, Keys.Longitude: -121.8879675]
+        "Convention Center Garage": [Keys.Latitude: 37.3296, Keys.Longitude: -121.8866],
+        "Fourth Street Garage": [Keys.Latitude: 37.3367, Keys.Longitude: -121.88667],
+        "Second San Carlos Garage": [Keys.Latitude: 37.3330, Keys.Longitude: -121.8865]
         
     ]
     //"Third Street Garage": [Keys.Latitude: 37.3361777, Keys.Longitude: -121.8950256],
     //        "City Hall Garage": [Keys.Latitude: 37.3377472, Keys.Longitude: -121.8871468],
     //        "Market San Pedro Square Garage": [Keys.Latitude: 37.3361778, Keys.Longitude: -121.8950148 ],
     //        "Fourth Street Garage": [Keys.Latitude: 37.3363783, Keys.Longitude: -121.8881668],
+    //"Second San Carlos Garage": [Keys.Latitude: 37.3325201, Keys.Longitude: -121.8879675] on San Carlos street
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
@@ -127,13 +128,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     else{
                         
                         let newGarage = Garage(entity: Garage.entity(), insertInto: context)
-                        //Leave the word "Garage" off of name if device has small screen
-                        if UIScreen.main.bounds.size.height < CGFloat(Constants.SmallScreenHeight){
-                            newGarage.name = garage[Index.Name].replacingOccurrences(of: "Garage", with: "")
-                        }
-                        else {
-                            newGarage.name = garage[Index.Name]
-                        }
+
+                        newGarage.name = garage[Index.Name]
                         newGarage.open = open
                         newGarage.spaces = garage[Index.Spaces]
                         newGarage.capacity = garage[Index.Capacity]
@@ -166,14 +162,14 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func findLocation(garage: Garage){
         
         if KnownGarages.keys.contains(garage.name!){
-//            print("found garage named: \(garage.name)")
+            print("found garage named: \(garage.name)")
             let coordinates = KnownGarages[garage.name!]
             let coordinate = CLLocationCoordinate2D(latitude: (coordinates?[Keys.Latitude])!, longitude: (coordinates?[Keys.Longitude])!)
             createPin(relatedTo: garage, at: coordinate)
         }
         else{
         //Forward Geocode garage location
-//            print("searching for garage location of : \(garage.name)")
+            print("searching for garage location of : \(garage.name)")
             let request = MKLocalSearchRequest()
             request.naturalLanguageQuery = garage.name! + Constants.City
             let search = MKLocalSearch(request: request)
@@ -202,14 +198,17 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             newPin.latitude = coordinate.latitude
             newPin.longitude = coordinate.longitude
             self.storedPins.append(newPin)
-//            print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
+            print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
             //Create map annotation for display
             let annotation = MKPointAnnotation()
             annotation.coordinate.latitude = newPin.latitude
             annotation.coordinate.longitude = newPin.longitude
             annotation.title = garage.name
             self.annotations.append(annotation)
-            self.addAnnotationsToMap()
+            self.mapView.addAnnotation(annotation)
+            self.mapView.reloadInputViews()
+            self.numberOfPinsOnMap += 1
+            print("number of pins on map: \(self.numberOfPinsOnMap)")
             delegate.saveContext()
         }
     }
@@ -229,7 +228,14 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "GarageTableCell", for: indexPath) as! GarageTableCell
-        cell.nameLabel?.text = garageObjects[indexPath.row].name
+        //Leave the word "Garage" off of name if device has small screen
+        if UIScreen.main.bounds.size.width < CGFloat(Constants.SmallScreenWidth){
+            cell.nameLabel?.text = garageObjects[indexPath.row].name?.replacingOccurrences(of: "Garage", with: "")
+        }
+        else {
+            cell.nameLabel?.text = garageObjects[indexPath.row].name
+        }
+//        cell.nameLabel?.text = garageObjects[indexPath.row].name
         cell.spacesLabel?.text = garageObjects[indexPath.row].open ? garageObjects[indexPath.row].spaces:"closed"
         if isStale(timestamp: garageObjects[indexPath.row].timestamp!){
             cell.spacesLabel?.text = Constants.StaleData
@@ -352,7 +358,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         do {
             let results = try delegate.persistentContainer.viewContext.fetch(fetchRequest)
             garageObjects = results
-//            print("Number of garages loaded = \(results.count)")
+            print("Number of garages loaded = \(results.count)")
         } catch let error as NSError {
             print("Could not fetch Garages. \(error), \(error.userInfo)")
         }
@@ -376,7 +382,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.annotations.append(annotation)
              }
             storedPins = results
-//            print("Number of pins loaded = \(results.count)")
+            print("Number of pins loaded = \(results.count)")
         } catch let error as NSError {
             print("Could not fetch Pins. \(error), \(error.userInfo)")
         }

@@ -16,8 +16,6 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     var garageName = Constants.DefaultGarageName
     let locationManager = CLLocationManager()
     let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
-//    var span: MKCoordinateSpan!
-  //  var region: MKCoordinateRegion!
     var firstLocation = true
     @IBOutlet weak var mapView: MKMapView!
     
@@ -92,7 +90,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         let myCoordinates = CLLocationCoordinate2D(latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude)
         let myAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = myCoordinates
-//        mapView.addAnnotation(myAnnotation)
+        mapView.addAnnotation(myAnnotation)
     }
     func setDefaultSpan(){
         let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)

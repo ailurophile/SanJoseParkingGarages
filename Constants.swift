@@ -23,6 +23,7 @@ struct Constants {
     static let LatDelta = 0.019108101105551611
     static let LonDelta = 0.071067820396351067
     static let StaleData = "?"
+    static let ClosedIndicator = "Closed"
     static let DefaultGarageName = "Garage"
 
 }

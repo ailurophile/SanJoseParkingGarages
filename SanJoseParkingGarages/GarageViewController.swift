@@ -93,6 +93,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
 //                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
+//                garageArrays[3][Index.Open] = Constants.ClosedIndicator // test a garage being closed
                 DispatchQueue.main.async {
                 //check if more garages in Core Data than returned from API
                 if self.garageObjects.count > garageArrays.count {

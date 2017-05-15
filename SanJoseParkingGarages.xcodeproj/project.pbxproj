@@ -23,6 +23,7 @@
 		D783975A1EBD936800F64DCB /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */; };
 		D783975B1EBD936800F64DCB /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */; };
 		D78397621EBE6A1900F64DCB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397611EBE6A1900F64DCB /* Constants.swift */; };
+		D78F2FC81ECA1189007F8D6B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D78F2FC71ECA1189007F8D6B /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D78397611EBE6A1900F64DCB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D78F2FC71ECA1189007F8D6B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 		D7099D801EB29F4200C1B2F6 = {
 			isa = PBXGroup;
 			children = (
+				D78F2FC71ECA1189007F8D6B /* README.md */,
 				D78397551EBD936800F64DCB /* Garage+CoreDataProperties.swift */,
 				D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */,
 				D7099D8B1EB29F4200C1B2F6 /* SanJoseParkingGarages */,
@@ -221,6 +224,7 @@
 				D7099D8D1EB29F4200C1B2F6 /* AppDelegate.swift in Sources */,
 				D783974B1EBBAB0000F64DCB /* NotifyUser.swift in Sources */,
 				D78397591EBD936800F64DCB /* Garage+CoreDataProperties.swift in Sources */,
+				D78F2FC81ECA1189007F8D6B /* README.md in Sources */,
 				D7099DA21EB3F2A800C1B2F6 /* GarageTableCell.swift in Sources */,
 				D78397581EBD936800F64DCB /* Garage+CoreDataClass.swift in Sources */,
 				D78397491EBB939D00F64DCB /* Junar.swift in Sources */,

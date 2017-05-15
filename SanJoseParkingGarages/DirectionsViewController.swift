@@ -29,7 +29,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             mapView.showsUserLocation = true
-//            locationManager.requestLocation()
+            locationManager.requestLocation()
         } else {
             locationManager.requestWhenInUseAuthorization()
         }
@@ -70,7 +70,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
  
 
-    func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
+/*    func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
         sendAlert(self, message: "Unable to find current location!")
     }
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
@@ -93,6 +93,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         }
         mapView.showsUserLocation = false
     }
+ */
     //MARK: Location Manager delegate methods
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         sendAlert(self, message: "Location Manager unsuccessful")
@@ -100,13 +101,30 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
         mapView.showsUserLocation = false
-/*
-        let myLocation = locations[0]
-        let myCoordinates = CLLocationCoordinate2D(latitude: myLocation.coordinate.latitude, longitude: myLocation.coordinate.longitude)
-        let myAnnotation = MKPointAnnotation()
-        myAnnotation.coordinate = myCoordinates
- */
-//        mapView.addAnnotation(myAnnotation)
+
+        let userLocation = locations[0]
+        let userCoordinates = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+        let newAnnotation = MKPointAnnotation()
+        newAnnotation.coordinate = userCoordinates
+        newAnnotation.title = "You are here"
+        userAnnotation = newAnnotation
+ 
+        mapView.addAnnotation(userAnnotation)
+        //modify span to encompass user location the first time it is found
+        if firstLocation{
+            let latitudeDelta = abs(userLocation.coordinate.latitude - targetGarage.latitude)*2.0
+            let longitudeDelta = abs(userLocation.coordinate.longitude - targetGarage.longitude)*2.0
+            let midpointLatitude = (userLocation.coordinate.latitude + targetGarage.latitude)/2.0
+            let midpointLongitude = (userLocation.coordinate.longitude + targetGarage.longitude)/2.0
+            let center = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
+            let span = MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
+            let region = MKCoordinateRegionMake(center, span)
+            mapView.setRegion(region, animated: true)
+            firstLocation = false
+            
+        }
+//        mapView.showsUserLocation = false
+
     }
     func setDefaultSpan(){
         let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)
@@ -115,9 +133,11 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
     @IBAction func updateLocationButtonSelected(_ sender: Any) {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            mapView.removeAnnotation(userAnnotation)
+            if userAnnotation != nil{
+                mapView.removeAnnotation(userAnnotation)
+            }
             mapView.showsUserLocation = true
-//            mapView.reloadInputViews()
+            mapView.reloadInputViews()
             locationManager.requestLocation()
         }
         else{

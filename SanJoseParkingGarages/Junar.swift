@@ -68,7 +68,7 @@ class JunarClient: NSObject{
                 sendError("No data was returned by the request!")
                 return
             }
-            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
+//            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue)!)
             
             
             self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForQuery)

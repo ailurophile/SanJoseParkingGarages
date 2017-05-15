@@ -70,30 +70,6 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
  
 
-/*    func mapView(_ mapView: MKMapView, didFailToLocateUserWithError error: Error) {
-        sendAlert(self, message: "Unable to find current location!")
-    }
-    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        let myLocation = MKPointAnnotation()
-        myLocation.coordinate = userLocation.coordinate
-        mapView.addAnnotation(myLocation)
-        userAnnotation = myLocation
-        //modify span to encompass user location the first time it is found
-        if firstLocation{
-            let latitudeDelta = abs(userLocation.coordinate.latitude - targetGarage.latitude)*2.0
-            let longitudeDelta = abs(userLocation.coordinate.longitude - targetGarage.longitude)*2.0
-            let midpointLatitude = (userLocation.coordinate.latitude + targetGarage.latitude)/2.0
-            let midpointLongitude = (userLocation.coordinate.longitude + targetGarage.longitude)/2.0
-            let center = CLLocationCoordinate2D(latitude: midpointLatitude, longitude: midpointLongitude)
-            let span = MKCoordinateSpan(latitudeDelta: latitudeDelta, longitudeDelta: longitudeDelta)
-            let region = MKCoordinateRegionMake(center, span)
-            mapView.setRegion(region, animated: true)
-            firstLocation = false
-
-        }
-        mapView.showsUserLocation = false
-    }
- */
     //MARK: Location Manager delegate methods
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         sendAlert(self, message: "Location Manager unsuccessful")
@@ -123,9 +99,8 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
             firstLocation = false
             
         }
-//        mapView.showsUserLocation = false
-
     }
+    //Zoom in on garage location
     func setDefaultSpan(){
         let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)
         let region = MKCoordinateRegionMake(targetGarage, span)
@@ -144,6 +119,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
             sendAlert(self, message: "Enable Location Services for this feature")
         }
     }
+    //Send coordinates and garage name to Maps App for driving directions
     @IBAction func getDirections(_ sender: Any) {
 
         let placemark = MKPlacemark(coordinate: targetGarage)

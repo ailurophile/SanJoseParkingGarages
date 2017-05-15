@@ -19,8 +19,6 @@ class LocationViewController: UIViewController, UITextViewDelegate{
         locationTextView.delegate = self
         //Load user preferences & Location reminder
         locationTextView.text = UserDefaults.standard.value(forKey: Keys.LocationReminder) as! String
-//        locationTextView.text = "Does the box show up now?"
-
         let prefersTextClears = UserDefaults.standard.value(forKey: Keys.TextViewClears) as! Bool
         textViewSwitch.setOn(prefersTextClears, animated: true)
         
@@ -37,10 +35,8 @@ class LocationViewController: UIViewController, UITextViewDelegate{
         }
     }
     
-    func textViewDidChange(_ textView: UITextView) {
-        
-    }
-    
+
+    //Dismiss keyboard by touching outside of text box
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         resignFirstResponder()
         view.endEditing(true)

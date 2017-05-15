@@ -214,7 +214,7 @@
                                 <rect key="frame" x="47" y="63.5" width="226" height="441"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
-                                        <rect key="frame" x="0.0" y="0.0" width="226" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="226" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -224,7 +224,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
-                                        <rect key="frame" x="0.0" y="41" width="226" height="259"/>
+                                        <rect key="frame" x="0.0" y="16" width="226" height="234"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="143" id="jfz-26-BFV"/>
@@ -233,31 +233,31 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-eE-YOw">
-                                        <rect key="frame" x="0.0" y="316" width="226" height="125"/>
+                                        <rect key="frame" x="0.0" y="266" width="226" height="175"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2E-b7-YaC" userLabel="Retain text label">
-                                                <rect key="frame" x="0.0" y="1" width="89" height="123"/>
+                                                <rect key="frame" x="0.0" y="1" width="89" height="173"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iIl-UM-TMB">
-                                                <rect key="frame" x="89" y="47" width="51" height="31"/>
+                                                <rect key="frame" x="89" y="72" width="51" height="31"/>
                                                 <connections>
                                                     <action selector="locationTextSwitchSet:" destination="eDi-PY-3o3" eventType="valueChanged" id="Dnv-eW-zJ5"/>
                                                 </connections>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohW-ae-7XT" userLabel="Clear text label">
-                                                <rect key="frame" x="138" y="1" width="88" height="123"/>
+                                                <rect key="frame" x="138" y="1" width="88" height="173"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="125" id="0Lv-KH-6oW"/>
+                                            <constraint firstAttribute="height" constant="175" id="0Lv-KH-6oW"/>
                                             <constraint firstItem="o2E-b7-YaC" firstAttribute="baseline" secondItem="ohW-ae-7XT" secondAttribute="baseline" id="EmB-68-dIw"/>
-                                            <constraint firstItem="iIl-UM-TMB" firstAttribute="top" relation="lessThanOrEqual" secondItem="3VX-eE-YOw" secondAttribute="top" constant="56" id="GVY-Yk-E4f"/>
+                                            <constraint firstItem="iIl-UM-TMB" firstAttribute="top" relation="lessThanOrEqual" secondItem="3VX-eE-YOw" secondAttribute="top" constant="75" id="GVY-Yk-E4f"/>
                                             <constraint firstItem="iIl-UM-TMB" firstAttribute="centerX" secondItem="3VX-eE-YOw" secondAttribute="centerX" id="UvA-YD-A0a"/>
                                             <constraint firstItem="o2E-b7-YaC" firstAttribute="top" secondItem="3VX-eE-YOw" secondAttribute="top" constant="1" id="a3b-Sz-7V1"/>
                                         </constraints>

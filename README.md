@@ -1,6 +1,6 @@
 # SanJoseParkingGarages
 
-The San Jose Parking Garages app downloads parking space availability data from the city of San Jose for the city-owned garages downtown allowing users to see their location relative to the selected garage and use Apple Maps for directions if so desired.  If the data stored in memory is older than 15 minutes when the app is loaded it will show ?? instead of a number in the spaces available column until fresh data is available from the network.  If a garage is closed the word closed will appear in the spaces available column.  There is also a location notepad which the user can use to store a reminder about where the car is parked for retrieval later.
+The San Jose Parking Garages app downloads parking space availability and garage capacity data from the city of San Jose for the city-owned garages downtown allowing users to see their location relative to the selected garage and use Apple Maps for directions if so desired.  If the data stored in memory is older than 15 minutes when the app is loaded it will show ?? instead of a number in the spaces available column until fresh data is available from the network.  If a garage is closed the word closed will appear in the spaces available column.  There is also a location notepad which the user can use to store a reminder about where the car is parked for retrieval later.
 
 ## Navigation
 
@@ -16,6 +16,7 @@ The San Jose Parking Garages app downloads parking space availability data from 
 
 * Tap inside text box to type in a reminder of where the car is parked.
 * Tap Save button to store the contents of the text box in memory.
+* Tap outside of text box to dismiss keyboard.
 * Select desired text box behavior via switch. Selecting Edit text will cause the contents of the box to remain on screen when the box is touched so the user can make edits.  Selecting Replace will cause the text box to clear when touched so that an entirely new note can easily be entered.  This selection is stored so the desired behavior will be the default the next time this view is active.
 
 ### Directions View

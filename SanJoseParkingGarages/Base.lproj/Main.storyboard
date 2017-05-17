@@ -43,17 +43,17 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wSJ-yg-mQD">
-                                        <rect key="frame" x="150" y="174" width="20" height="16"/>
+                                        <rect key="frame" x="150" y="174" width="20" height="0.0"/>
                                     </activityIndicatorView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-by-Ovr">
-                                        <rect key="frame" x="0.0" y="190" width="320" height="270"/>
+                                        <rect key="frame" x="0.0" y="174" width="320" height="286"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GarageTableCell" id="brZ-u3-fK7" userLabel="GarageTableCell" customClass="GarageTableCell" customModule="SanJoseParkingGarages" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="brZ-u3-fK7" id="JX9-OJ-Lhl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="xuV-vu-suD">
@@ -110,9 +110,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="H5Y-86-QCg" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Dch-8A-GCs"/>
+                            <constraint firstItem="H5Y-86-QCg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="7co-7K-Cdw"/>
                             <constraint firstAttribute="trailing" secondItem="H5Y-86-QCg" secondAttribute="trailing" id="YCe-80-tiB"/>
-                            <constraint firstItem="H5Y-86-QCg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="YiY-LD-EUO"/>
+                            <constraint firstItem="H5Y-86-QCg" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Yhc-XU-rvx"/>
                             <constraint firstItem="H5Y-86-QCg" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="xpg-BH-Jqt"/>
                         </constraints>
                     </view>

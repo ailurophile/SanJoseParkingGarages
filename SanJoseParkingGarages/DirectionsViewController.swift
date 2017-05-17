@@ -18,7 +18,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
     var firstLocation = true
     var garageAnnotation:MKPointAnnotation! = nil
-    var userAnnotation:MKPointAnnotation! = nil
+    var userAnnotations = [MKPointAnnotation]()
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -64,6 +64,13 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         }
         else {
             pinView!.annotation = annotation
+            if (annotation.coordinate.latitude == garageAnnotation.coordinate.latitude) && (annotation.coordinate.longitude == garageAnnotation.coordinate.longitude){
+                pinView!.pinTintColor = .purple
+            }
+            else{
+                pinView!.pinTintColor = .blue
+            }
+
         }
         
         return pinView
@@ -83,9 +90,9 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         let newAnnotation = MKPointAnnotation()
         newAnnotation.coordinate = userCoordinates
         newAnnotation.title = "You are here"
-        userAnnotation = newAnnotation
+        userAnnotations.append(newAnnotation)
  
-        mapView.addAnnotation(userAnnotation)
+        mapView.addAnnotation(newAnnotation)
         //modify span to encompass user location the first time it is found
         if firstLocation{
             let latitudeDelta = abs(userLocation.coordinate.latitude - targetGarage.latitude)*2.0
@@ -108,11 +115,11 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
     @IBAction func updateLocationButtonSelected(_ sender: Any) {
         if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            if userAnnotation != nil{
-                mapView.removeAnnotation(userAnnotation)
+            if userAnnotations.count > 0 {
+                mapView.removeAnnotations(userAnnotations)
             }
             mapView.showsUserLocation = true
-            mapView.reloadInputViews()
+//            mapView.reloadInputViews()
             locationManager.requestLocation()
         }
         else{

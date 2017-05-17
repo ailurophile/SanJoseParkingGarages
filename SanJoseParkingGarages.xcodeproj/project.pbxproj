@@ -23,7 +23,7 @@
 		D783975A1EBD936800F64DCB /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */; };
 		D783975B1EBD936800F64DCB /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */; };
 		D78397621EBE6A1900F64DCB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D78397611EBE6A1900F64DCB /* Constants.swift */; };
-		D78F2FC81ECA1189007F8D6B /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D78F2FC71ECA1189007F8D6B /* README.md */; };
+		D78F2FC81ECA1189007F8D6B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D78F2FC71ECA1189007F8D6B /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -201,6 +201,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D78F2FC81ECA1189007F8D6B /* README.md in Resources */,
 				D7099D9A1EB29F4200C1B2F6 /* LaunchScreen.storyboard in Resources */,
 				D7099D971EB29F4200C1B2F6 /* Assets.xcassets in Resources */,
 				D7099D921EB29F4200C1B2F6 /* Main.storyboard in Resources */,
@@ -224,7 +225,6 @@
 				D7099D8D1EB29F4200C1B2F6 /* AppDelegate.swift in Sources */,
 				D783974B1EBBAB0000F64DCB /* NotifyUser.swift in Sources */,
 				D78397591EBD936800F64DCB /* Garage+CoreDataProperties.swift in Sources */,
-				D78F2FC81ECA1189007F8D6B /* README.md in Sources */,
 				D7099DA21EB3F2A800C1B2F6 /* GarageTableCell.swift in Sources */,
 				D78397581EBD936800F64DCB /* Garage+CoreDataClass.swift in Sources */,
 				D78397491EBB939D00F64DCB /* Junar.swift in Sources */,

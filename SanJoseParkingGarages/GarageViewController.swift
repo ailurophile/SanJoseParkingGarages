@@ -24,16 +24,18 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     let KnownGarages = [
         "Convention Center Garage": [[Keys.Latitude: 37.3296, Keys.Longitude: -121.8870],
-                                     [Keys.Latitude: 37.3278, Keys.Longitude: -121.8908]],
+                                     [Keys.Latitude: 37.328196, Keys.Longitude: -121.890135]],
         "Fourth Street Garage": [[Keys.Latitude: 37.33667, Keys.Longitude: -121.886645],
                                  [Keys.Latitude: 37.3361, Keys.Longitude: -121.8856]],
         "Second San Carlos Garage": [[Keys.Latitude: 37.3330, Keys.Longitude: -121.8865],
-                                     [Keys.Latitude: 37.3332, Keys.Longitude: -121.885]],
-        "Third Street Garage": [[Keys.Latitude: 37.33780, Keys.Longitude: -121.8950256],
+                                     [Keys.Latitude: 37.333255, Keys.Longitude: -121.885661]],
+        "Third Street Garage": [[Keys.Latitude: 37.338072, Keys.Longitude: -121.889262],
                                 [Keys.Latitude: 37.337666, Keys.Longitude: -121.890141]],
         "City Hall Garage": [[Keys.Latitude: 37.3379, Keys.Longitude: -121.8846]],
-        "Market San Pedro Square Garage": [[Keys.Latitude: 37.3360, Keys.Longitude: -121.8923 ],
+        "Market San Pedro Square Garage": [[Keys.Latitude: 37.33595, Keys.Longitude: -121.8928 ],
                                            [Keys.Latitude: 37.3359, Keys.Longitude: -121.8934]]
+        //        [Keys.Latitude: 37.3360, Keys.Longitude: -121.8923] [Keys.Latitude: 37.3287, Keys.Longitude: -121.890130]],
+
 
     ] as [String : [[String:Double]]]
     //
@@ -297,7 +299,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
 
     
-    // This delegate method is implemented to respond to taps. I
+    // Show garage name if pin is tapped
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             
@@ -312,11 +314,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
 
         mapView.removeAnnotations(mapView.annotations)
-/*        for pin in storedPins{
-            let annotation = GarageViewController.getAnnotation(pin: pin)
-            annotations.append(annotation)
-            
-        }*/
         numberOfPinsOnMap = annotations.count
         mapView.addAnnotations(annotations)
     }

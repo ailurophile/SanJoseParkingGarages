@@ -13,11 +13,12 @@ import  MapKit
 
 class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
     var targetGarage: CLLocationCoordinate2D!
+    var secondEntrance: CLLocationCoordinate2D?
     var garageName = Constants.DefaultGarageName
     let locationManager = CLLocationManager()
     let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
     var firstLocation = true
-    var garageAnnotation:MKPointAnnotation! = nil
+    var garageAnnotations =  [MKPointAnnotation]()
     var userAnnotations = [MKPointAnnotation]()
 
     @IBOutlet weak var mapView: MKMapView!
@@ -36,12 +37,19 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         mapView.centerCoordinate = targetGarage
 
-        //show garage and user if location services enabled
-        garageAnnotation = MKPointAnnotation()
+        //show garage entrances and user if location services enabled
+        let garageAnnotation = MKPointAnnotation()
         garageAnnotation.coordinate = targetGarage
         garageAnnotation.title = garageName
         setDefaultSpan()
-        mapView.addAnnotation(garageAnnotation)
+        garageAnnotations.append(garageAnnotation)
+        if let secondEntrance = secondEntrance{
+            let secondAnnotation = MKPointAnnotation()
+            secondAnnotation.coordinate = secondEntrance
+            secondAnnotation.title = garageName + "2nd entrance"
+            garageAnnotations.append(secondAnnotation)
+        }
+        mapView.addAnnotations(garageAnnotations)
     }
 
     //MARK: Map methods
@@ -54,7 +62,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = true
-            if (annotation.coordinate.latitude == garageAnnotation.coordinate.latitude) && (annotation.coordinate.longitude == garageAnnotation.coordinate.longitude){
+            if isGarageEntrance(annotation: annotation as! MKPointAnnotation){
                 pinView!.pinTintColor = .purple
             }
             else{
@@ -64,7 +72,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         }
         else {
             pinView!.annotation = annotation
-            if (annotation.coordinate.latitude == garageAnnotation.coordinate.latitude) && (annotation.coordinate.longitude == garageAnnotation.coordinate.longitude){
+            if isGarageEntrance(annotation: annotation as! MKPointAnnotation){
                 pinView!.pinTintColor = .purple
             }
             else{
@@ -77,6 +85,16 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
  
 
+    func isGarageEntrance(annotation: MKPointAnnotation)->Bool{
+
+        for garageAnnotation in garageAnnotations{
+            if (annotation.coordinate.latitude == garageAnnotation.coordinate.latitude) && (annotation.coordinate.longitude == garageAnnotation.coordinate.longitude){
+                return true
+            }
+
+        }
+        return false
+    }
     //MARK: Location Manager delegate methods
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         sendAlert(self, message: "Location Manager unsuccessful")

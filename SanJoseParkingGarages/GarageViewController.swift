@@ -20,15 +20,23 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var time:NSDate!
     var desiredLocation: CLLocationCoordinate2D!
     var destinationName = Constants.DefaultGarageName
+    var altCoordinates:CLLocationCoordinate2D? = nil
+
     let KnownGarages = [
-        "Convention Center Garage": [Keys.Latitude: 37.3296, Keys.Longitude: -121.8866],
-        "Fourth Street Garage": [Keys.Latitude: 37.3367, Keys.Longitude: -121.88667],
-        "Second San Carlos Garage": [Keys.Latitude: 37.3330, Keys.Longitude: -121.8865]
-        
-    ]
-    //"Third Street Garage": [Keys.Latitude: 37.3361777, Keys.Longitude: -121.8950256],
-    //        "City Hall Garage": [Keys.Latitude: 37.3377472, Keys.Longitude: -121.8871468],
-    //        "Market San Pedro Square Garage": [Keys.Latitude: 37.3361778, Keys.Longitude: -121.8950148 ],
+        "Convention Center Garage": [[Keys.Latitude: 37.3296, Keys.Longitude: -121.8870],
+                                     [Keys.Latitude: 37.3278, Keys.Longitude: -121.8908]],
+        "Fourth Street Garage": [[Keys.Latitude: 37.33667, Keys.Longitude: -121.886645],
+                                 [Keys.Latitude: 37.3361, Keys.Longitude: -121.8856]],
+        "Second San Carlos Garage": [[Keys.Latitude: 37.3330, Keys.Longitude: -121.8865],
+                                     [Keys.Latitude: 37.3332, Keys.Longitude: -121.885]],
+        "Third Street Garage": [[Keys.Latitude: 37.33780, Keys.Longitude: -121.8950256],
+                                [Keys.Latitude: 37.337666, Keys.Longitude: -121.890141]],
+        "City Hall Garage": [[Keys.Latitude: 37.3379, Keys.Longitude: -121.8846]],
+        "Market San Pedro Square Garage": [[Keys.Latitude: 37.3360, Keys.Longitude: -121.8923 ],
+                                           [Keys.Latitude: 37.3359, Keys.Longitude: -121.8934]]
+
+    ] as [String : [[String:Double]]]
+    //
     //        "Fourth Street Garage": [Keys.Latitude: 37.3363783, Keys.Longitude: -121.8881668],
     //"Second San Carlos Garage": [Keys.Latitude: 37.3325201, Keys.Longitude: -121.8879675] on San Carlos street
 
@@ -93,6 +101,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
 //                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
+//                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
 //                garageArrays[3][Index.Open] = Constants.ClosedIndicator // test a garage being closed
                 DispatchQueue.main.async {
                 //check if more garages in Core Data than returned from API
@@ -108,7 +117,9 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     //clear all objects from local memory
                     self.garageObjects.removeAll()
                     self.storedPins.removeAll()
+                    self.mapView.removeAnnotations(self.annotations) //remove old pins from map
                     self.annotations.removeAll()
+                    self.numberOfPinsOnMap = 0
                 }
                 self.time = NSDate() //for use as timestamp for invalidating data
                 
@@ -164,9 +175,18 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         if KnownGarages.keys.contains(garage.name!){
             print("found garage named: \(garage.name)")
-            let coordinates = KnownGarages[garage.name!]
-            let coordinate = CLLocationCoordinate2D(latitude: (coordinates?[Keys.Latitude])!, longitude: (coordinates?[Keys.Longitude])!)
-            createPin(relatedTo: garage, at: coordinate)
+            let garageEntrances = KnownGarages[garage.name!] //array of entrance coordinates
+            print("Garage entrances: \(garageEntrances)")
+            let coordinates = garageEntrances![0]  //Use first entrance for Pin location
+            let coordinate = CLLocationCoordinate2D(latitude: (coordinates[Keys.Latitude])!, longitude: (coordinates[Keys.Longitude])!)
+            if (garageEntrances?.count)! > 1{
+                let altCoordinates = garageEntrances?[1]
+                let altCoordinate = CLLocationCoordinate2D(latitude: (altCoordinates?[Keys.Latitude])!, longitude: (altCoordinates?[Keys.Longitude])!)
+                createPin(relatedTo: garage, at: coordinate, alternate: altCoordinate)
+            }
+            else{
+                createPin(relatedTo: garage, at: coordinate, alternate: nil)
+            }
         }
         else{
         //Forward Geocode garage location
@@ -182,13 +202,13 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     return
                 }
                 let coordinate = mapItem.placemark.coordinate
-                self.createPin(relatedTo: garage, at: coordinate)
+                self.createPin(relatedTo: garage, at: coordinate, alternate: nil)
             })
  
         }
         
     }
-    func createPin(relatedTo garage:Garage, at coordinate:CLLocationCoordinate2D){
+    func createPin(relatedTo garage:Garage, at coordinate:CLLocationCoordinate2D, alternate: CLLocationCoordinate2D?){
         DispatchQueue.main.async {
             //Get the persistent container
             let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -198,6 +218,10 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             newPin.garage = garage
             newPin.latitude = coordinate.latitude
             newPin.longitude = coordinate.longitude
+            if let alternate = alternate{  //store coordinates of 2nd entrance if it exists
+                newPin.latitude2 = alternate.latitude
+                newPin.longitude2 = alternate.longitude
+            }
             self.storedPins.append(newPin)
             print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
             //Create map annotation for display
@@ -218,13 +242,16 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
 // MARK: TableView Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let pin = garageObjects[indexPath.row].pin else{
+                guard let pin = garageObjects[indexPath.row].pin else{
             sendAlert(self, message: "No location data for this garage")
             return
         }
         let coordinates = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
+        if pin.latitude2 != nil && pin.longitude2 != nil {
+            altCoordinates = CLLocationCoordinate2D(latitude: pin.latitude2, longitude: pin.longitude2)
+        }
         let name = garageObjects[indexPath.row].name
-        showSelectedGarage(coordinates: coordinates, title: name)
+        showSelectedGarage(coordinates: coordinates, title: name, secondEntrance: altCoordinates)
         return
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
@@ -277,7 +304,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //TBD present view controller with button to go to maps for directions
             let coordinates = view.annotation?.coordinate
             let name = getPin(for: coordinates!)?.garage?.name
-            showSelectedGarage(coordinates: coordinates!, title: name)
+            showSelectedGarage(coordinates: coordinates!, title: name, secondEntrance: nil)
         }
     }
 
@@ -312,7 +339,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         print("map center: \(center) span: \(span) region: \(region)")
     }*/
 //MARK: navigation methods
-    func showSelectedGarage(coordinates: CLLocationCoordinate2D, title: String?){
+    func showSelectedGarage(coordinates: CLLocationCoordinate2D, title: String?, secondEntrance: CLLocationCoordinate2D?){
         desiredLocation = coordinates
         if let name = title {
             destinationName = name
@@ -329,6 +356,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let nextController = segue.destination as! DirectionsViewController
             nextController.targetGarage = desiredLocation
             nextController.garageName = destinationName
+            nextController.secondEntrance = altCoordinates
         }
     }
 //MARK: Core Data methods

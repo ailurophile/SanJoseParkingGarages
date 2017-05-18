@@ -45,6 +45,7 @@
 		D78397561EBD936800F64DCB /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
 		D78397571EBD936800F64DCB /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		D78397611EBE6A1900F64DCB /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D78665291ECD1A8500FBA7ED /* SanJoseParkingGarages2Entrances.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SanJoseParkingGarages2Entrances.xcdatamodel; sourceTree = "<group>"; };
 		D78F2FC71ECA1189007F8D6B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -405,9 +406,10 @@
 		D7099D931EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D78665291ECD1A8500FBA7ED /* SanJoseParkingGarages2Entrances.xcdatamodel */,
 				D7099D941EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodel */,
 			);
-			currentVersion = D7099D941EB29F4200C1B2F6 /* SanJoseParkingGarages.xcdatamodel */;
+			currentVersion = D78665291ECD1A8500FBA7ED /* SanJoseParkingGarages2Entrances.xcdatamodel */;
 			name = SanJoseParkingGarages.xcdatamodeld;
 			path = SanJoseParkingGarages/SanJoseParkingGarages.xcdatamodeld;
 			sourceTree = "<group>";

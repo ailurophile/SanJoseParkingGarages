@@ -46,7 +46,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         if let secondEntrance = secondEntrance{
             let secondAnnotation = MKPointAnnotation()
             secondAnnotation.coordinate = secondEntrance
-            secondAnnotation.title = garageName + "2nd entrance"
+            secondAnnotation.title = garageName
             garageAnnotations.append(secondAnnotation)
         }
         mapView.addAnnotations(garageAnnotations)
@@ -61,7 +61,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-            pinView!.canShowCallout = true
+            pinView!.canShowCallout = false
             if isGarageEntrance(annotation: annotation as! MKPointAnnotation){
                 pinView!.pinTintColor = .purple
             }
@@ -84,6 +84,13 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         return pinView
     }
  
+    // open maps for selected pin
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView){
+    
+            let coordinates = view.annotation?.coordinate
+            let name = view.annotation?.title ?? Constants.DefaultGarageName
+            getDirections(coordinate: coordinates!, name: name)
+    }
 
     func isGarageEntrance(annotation: MKPointAnnotation)->Bool{
 
@@ -145,11 +152,12 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         }
     }
     //Send coordinates and garage name to Maps App for driving directions
-    @IBAction func getDirections(_ sender: Any) {
+    
+    func getDirections(coordinate: CLLocationCoordinate2D, name: String?) {
 
-        let placemark = MKPlacemark(coordinate: targetGarage)
+        let placemark = MKPlacemark(coordinate: coordinate)
         let mapItem = MKMapItem(placemark: placemark)
-        mapItem.name = garageName
+        mapItem.name = name
         mapItem.openInMaps(launchOptions: launchOptions)
     }
 }

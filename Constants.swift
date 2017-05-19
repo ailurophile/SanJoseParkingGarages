@@ -11,7 +11,9 @@ import Foundation
 struct PinProperties {
     static let Lat = "latitude"
     static let Lon = "longitude"
-
+    static let Lat2 = "latitude2"
+    static let Lon2 = "longitude2"
+    static let NoCoordinate = 0.0
 }
 struct Constants {
     static let SmallScreenWidth = 330.0

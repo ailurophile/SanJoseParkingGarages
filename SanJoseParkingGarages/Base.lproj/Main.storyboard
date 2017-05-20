@@ -206,10 +206,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
-                                <rect key="frame" x="47" y="63.5" width="226" height="441"/>
+                                <rect key="frame" x="47" y="74" width="226" height="420"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
-                                        <rect key="frame" x="0.0" y="0.0" width="226" height="0.0"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b5B-qK-LI7">
+                                        <rect key="frame" x="0.0" y="0.0" width="226" height="45"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -219,7 +219,7 @@
                                         </connections>
                                     </button>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
-                                        <rect key="frame" x="0.0" y="16" width="226" height="234"/>
+                                        <rect key="frame" x="0.0" y="61" width="226" height="168"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="143" id="jfz-26-BFV"/>
@@ -228,7 +228,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-eE-YOw">
-                                        <rect key="frame" x="0.0" y="266" width="226" height="175"/>
+                                        <rect key="frame" x="0.0" y="245" width="226" height="175"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2E-b7-YaC" userLabel="Retain text label">
                                                 <rect key="frame" x="0.0" y="1" width="89" height="173"/>
@@ -269,7 +269,7 @@
                         <constraints>
                             <constraint firstItem="me4-fX-SI0" firstAttribute="centerX" secondItem="ifw-55-nim" secondAttribute="centerX" id="bTF-Vb-6n6"/>
                             <constraint firstItem="me4-fX-SI0" firstAttribute="leading" secondItem="ifw-55-nim" secondAttribute="leadingMargin" constant="31" id="nkn-D7-cyt"/>
-                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" id="wEx-JQ-7Nq"/>
+                            <constraint firstItem="me4-fX-SI0" firstAttribute="top" secondItem="prk-QP-dOO" secondAttribute="bottom" constant="10" id="wEx-JQ-7Nq"/>
                             <constraint firstItem="me4-fX-SI0" firstAttribute="centerY" secondItem="ifw-55-nim" secondAttribute="centerY" id="xoI-1B-5M1"/>
                         </constraints>
                     </view>

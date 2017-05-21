@@ -43,36 +43,36 @@
                                         </connections>
                                     </button>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="wSJ-yg-mQD">
-                                        <rect key="frame" x="150" y="174" width="20" height="0.0"/>
+                                        <rect key="frame" x="150" y="174" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tiQ-by-Ovr">
-                                        <rect key="frame" x="0.0" y="174" width="320" height="286"/>
+                                        <rect key="frame" x="0.0" y="194" width="320" height="266"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="GarageTableCell" id="brZ-u3-fK7" userLabel="GarageTableCell" customClass="GarageTableCell" customModule="SanJoseParkingGarages" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="brZ-u3-fK7" id="JX9-OJ-Lhl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="xuV-vu-suD">
                                                             <rect key="frame" x="8" y="0.0" width="304" height="44"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="GarageName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phl-Dn-Tbo">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="162" height="44"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="161" height="44"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spaces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FiB-FM-Plt">
-                                                                    <rect key="frame" x="171" y="0.0" width="56.5" height="44"/>
+                                                                    <rect key="frame" x="170" y="0.0" width="57" height="44"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1Y-zm-zVe">
-                                                                    <rect key="frame" x="236.5" y="0.0" width="67.5" height="44"/>
+                                                                    <rect key="frame" x="236" y="0.0" width="68" height="44"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -159,14 +159,29 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qd2-xc-2o6">
-                                        <rect key="frame" x="0.0" y="23" width="288" height="437"/>
+                                        <rect key="frame" x="0.0" y="23" width="288" height="416.5"/>
                                     </mapView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Garage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggo-yR-c3y">
+                                        <rect key="frame" x="0.0" y="439.5" width="288" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Ggo-yR-c3y" secondAttribute="trailing" id="5b8-61-aiT"/>
+                                    <constraint firstItem="Ggo-yR-c3y" firstAttribute="leading" secondItem="MFa-JS-gTj" secondAttribute="leading" id="Mdp-QG-XZZ"/>
                                     <constraint firstAttribute="bottom" secondItem="Qd2-xc-2o6" secondAttribute="bottom" id="hFd-Bf-Izn"/>
                                     <constraint firstAttribute="trailing" secondItem="Qd2-xc-2o6" secondAttribute="trailing" id="msj-0V-Fql"/>
+                                    <constraint firstItem="Ggo-yR-c3y" firstAttribute="top" secondItem="Qd2-xc-2o6" secondAttribute="bottom" id="tju-vR-qv3"/>
+                                    <constraint firstAttribute="bottom" secondItem="Ggo-yR-c3y" secondAttribute="bottom" id="wBh-HC-Ara"/>
                                     <constraint firstItem="Qd2-xc-2o6" firstAttribute="leading" secondItem="MFa-JS-gTj" secondAttribute="leading" id="xTu-I8-w52"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hFd-Bf-Izn"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -186,12 +201,13 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="garageLabel" destination="Ggo-yR-c3y" id="Qod-GV-p2L"/>
                         <outlet property="mapView" destination="Qd2-xc-2o6" id="59j-5z-eMh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aha-RB-h9F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1164" y="-600"/>
+            <point key="canvasLocation" x="1162.5" y="-600"/>
         </scene>
         <!--Location View Controller-->
         <scene sceneID="lsl-sO-uRP">
@@ -230,7 +246,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-eE-YOw">
                                         <rect key="frame" x="0.0" y="245" width="226" height="175"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Text" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2E-b7-YaC" userLabel="Retain text label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2E-b7-YaC" userLabel="Retain text label">
                                                 <rect key="frame" x="0.0" y="1" width="89" height="173"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -242,7 +258,7 @@
                                                     <action selector="locationTextSwitchSet:" destination="eDi-PY-3o3" eventType="valueChanged" id="Dnv-eW-zJ5"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replace" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohW-ae-7XT" userLabel="Clear text label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohW-ae-7XT" userLabel="Clear text label">
                                                 <rect key="frame" x="138" y="1" width="88" height="173"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

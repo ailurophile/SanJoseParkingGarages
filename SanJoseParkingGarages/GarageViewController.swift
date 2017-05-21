@@ -78,11 +78,12 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         JunarClient.sharedInstance().queryJunar(completionHandlerForQuery: {(results, error) in
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
+                self.refreshButton.isEnabled = true
+
             }
             guard error == nil else{
                 print(error?.localizedDescription ?? "?? no localized description to print")
                 notifyUser(self, message: "Error: \(error!.localizedDescription)")
-                self.refreshButton.isEnabled = true
                 
 
                 return
@@ -90,7 +91,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             //Load garage dictionary
             guard let data = results as! [String: Any]? else{
                 notifyUser(self, message: "No garage data!")
-                self.refreshButton.isEnabled = true
                 return
             }
             //["Garage_Name","Garage_Status","Available_Visitor_Spaces","Total_Visitor_Spaces"]
@@ -163,7 +163,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 notifyUser(self, message: "No results key found in garage data!")
  
             }
-            self.refreshButton.isEnabled = true
 
         })
         
@@ -251,7 +250,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         let coordinates = CLLocationCoordinate2D(latitude: pin.latitude, longitude: pin.longitude)
         let name = garageObjects[indexPath.row].name
-//        if pin.latitude2 != nil && pin.longitude2 != nil {
         if pin.latitude2 != PinProperties.NoCoordinate {
             
             let altCoordinates = CLLocationCoordinate2D(latitude: pin.latitude2, longitude: pin.longitude2)

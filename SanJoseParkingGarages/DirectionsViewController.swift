@@ -22,9 +22,11 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     var userAnnotations = [MKPointAnnotation]()
 
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var garageLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        garageLabel.text = garageName
         mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation

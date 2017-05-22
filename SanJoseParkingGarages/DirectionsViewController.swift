@@ -115,27 +115,12 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
                     else{
                         pinView!.pinTintColor = .blue
                     }
-                    /*
-                    if userAnnotations.contains(annotation as! MKPointAnnotation){
-                        pinView!.pinTintColor = .blue
-                    }
-                    else{
-                        
-                        pinView!.pinTintColor = .purple
-                    }*/
-                }
+                 }
                 else{
                     
                     pinView!.pinTintColor = .purple
                 }
             }
-/*            if isGarageEntrance(annotation: annotation as! MKPointAnnotation){
-                pinView!.pinTintColor = .purple
-            }
-            else{
-                pinView!.pinTintColor = .blue
-            }
-*/
         }
         
         return pinView
@@ -201,7 +186,6 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
                 mapView.removeAnnotations(userAnnotations)
             }
             mapView.showsUserLocation = true
-//            mapView.reloadInputViews()
             locationManager.requestLocation()
         }
         else{

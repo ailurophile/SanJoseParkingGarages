@@ -39,13 +39,9 @@ class JunarClient: NSObject{
         "City Hall Garage": [[Keys.Latitude: 37.3379, Keys.Longitude: -121.8848]],
         "Market San Pedro Square Garage": [[Keys.Latitude: 37.33595, Keys.Longitude: -121.8928 ],
                                            [Keys.Latitude: 37.3359, Keys.Longitude: -121.8934]]
-        //        [Keys.Latitude: 37.3360, Keys.Longitude: -121.8923] [Keys.Latitude: 37.3287, Keys.Longitude: -121.890130]],
-        
         
         ] as [String : [[String:Double]]]
-    //
-    //        "Fourth Street Garage": [Keys.Latitude: 37.3363783, Keys.Longitude: -121.8881668],
-    //"Second San Carlos Garage": [Keys.Latitude: 37.3325201, Keys.Longitude: -121.8879675] on San Carlos street
+
     //MARK: Networking methods
     //Build URL
     func getURL()-> URL {

@@ -22,25 +22,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var destinationName = Constants.DefaultGarageName
     var secondEntranceCoordinates:CLLocationCoordinate2D? = nil
 
-    let KnownGarages = [
-        "Convention Center Garage": [[Keys.Latitude: 37.3296, Keys.Longitude: -121.8870],
-                                     [Keys.Latitude: 37.328196, Keys.Longitude: -121.890135]],
-        "Fourth Street Garage": [[Keys.Latitude: 37.33667, Keys.Longitude: -121.886645],
-                                 [Keys.Latitude: 37.3361, Keys.Longitude: -121.8856]],
-        "Second San Carlos Garage": [[Keys.Latitude: 37.3325, Keys.Longitude: -121.8862],
-                                     [Keys.Latitude: 37.3329, Keys.Longitude: -121.8854]],
-        "Third Street Garage": [[Keys.Latitude: 37.338072, Keys.Longitude: -121.889262],
-                                [Keys.Latitude: 37.3374, Keys.Longitude: -121.890]],
-        "City Hall Garage": [[Keys.Latitude: 37.3379, Keys.Longitude: -121.8848]],
-        "Market San Pedro Square Garage": [[Keys.Latitude: 37.33595, Keys.Longitude: -121.8928 ],
-                                           [Keys.Latitude: 37.3359, Keys.Longitude: -121.8934]]
-        //        [Keys.Latitude: 37.3360, Keys.Longitude: -121.8923] [Keys.Latitude: 37.3287, Keys.Longitude: -121.890130]],
-
-
-    ] as [String : [[String:Double]]]
-    //
-    //        "Fourth Street Garage": [Keys.Latitude: 37.3363783, Keys.Longitude: -121.8881668],
-    //"Second San Carlos Garage": [Keys.Latitude: 37.3325201, Keys.Longitude: -121.8879675] on San Carlos street
+    
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
@@ -170,8 +152,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func findLocation(garage: Garage){
         
-        if KnownGarages.keys.contains(garage.name!){
-            let garageEntrances = KnownGarages[garage.name!] //array of entrance coordinates
+        if JunarClient.KnownGarages.keys.contains(garage.name!){
+            let garageEntrances = JunarClient.KnownGarages[garage.name!] //array of entrance coordinates
             let coordinates = garageEntrances![0]  //Use first entrance for Pin location
             let coordinate = CLLocationCoordinate2D(latitude: (coordinates[Keys.Latitude])!, longitude: (coordinates[Keys.Longitude])!)
             if (garageEntrances?.count)! > 1{

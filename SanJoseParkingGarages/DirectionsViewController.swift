@@ -72,13 +72,20 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
             }
             else{
                 if annotation.isKind(of: MKPointAnnotation.self) {
+                    if isGarageEntrance(annotation: annotation as! MKPointAnnotation){
+                        pinView!.pinTintColor = .purple
+                    }
+                    else{
+                        pinView!.pinTintColor = .blue
+                    }
+                    /*
                     if userAnnotations.contains(annotation as! MKPointAnnotation){
                         pinView!.pinTintColor = .blue
                     }
                     else{
                         
                         pinView!.pinTintColor = .purple
-                    }
+                    }*/
                 }
                 else{
                     
@@ -102,13 +109,20 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
             }
             else{
                 if annotation.isKind(of: MKPointAnnotation.self) {
+                    if isGarageEntrance(annotation: annotation as! MKPointAnnotation){
+                        pinView!.pinTintColor = .purple
+                    }
+                    else{
+                        pinView!.pinTintColor = .blue
+                    }
+                    /*
                     if userAnnotations.contains(annotation as! MKPointAnnotation){
                         pinView!.pinTintColor = .blue
                     }
                     else{
                         
                         pinView!.pinTintColor = .purple
-                    }
+                    }*/
                 }
                 else{
                     

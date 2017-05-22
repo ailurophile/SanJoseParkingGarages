@@ -21,13 +21,31 @@ class JunarClient: NSObject{
     struct ParameterKeys {
         static let APIKey = "auth_key"
         static let GarageKey = "result"
-
-        
     }
     //MARK: Parameter Values
     struct ParameterValues {
         static let APIKey = "f3313e775ed0dbb3cc053ab1d1aafa07504d586c"
     }
+    //Coordinates of entrances to known garages
+    static let KnownGarages = [
+        "Convention Center Garage": [[Keys.Latitude: 37.3296, Keys.Longitude: -121.8870],
+                                     [Keys.Latitude: 37.328196, Keys.Longitude: -121.890135]],
+        "Fourth Street Garage": [[Keys.Latitude: 37.33667, Keys.Longitude: -121.886645],
+                                 [Keys.Latitude: 37.3361, Keys.Longitude: -121.8856]],
+        "Second San Carlos Garage": [[Keys.Latitude: 37.3325, Keys.Longitude: -121.8862],
+                                     [Keys.Latitude: 37.3329, Keys.Longitude: -121.8854]],
+        "Third Street Garage": [[Keys.Latitude: 37.338072, Keys.Longitude: -121.889262],
+                                [Keys.Latitude: 37.3374, Keys.Longitude: -121.890]],
+        "City Hall Garage": [[Keys.Latitude: 37.3379, Keys.Longitude: -121.8848]],
+        "Market San Pedro Square Garage": [[Keys.Latitude: 37.33595, Keys.Longitude: -121.8928 ],
+                                           [Keys.Latitude: 37.3359, Keys.Longitude: -121.8934]]
+        //        [Keys.Latitude: 37.3360, Keys.Longitude: -121.8923] [Keys.Latitude: 37.3287, Keys.Longitude: -121.890130]],
+        
+        
+        ] as [String : [[String:Double]]]
+    //
+    //        "Fourth Street Garage": [Keys.Latitude: 37.3363783, Keys.Longitude: -121.8881668],
+    //"Second San Carlos Garage": [Keys.Latitude: 37.3325201, Keys.Longitude: -121.8879675] on San Carlos street
     //MARK: Networking methods
     //Build URL
     func getURL()-> URL {

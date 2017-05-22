@@ -60,7 +60,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         loadPins()
         //Get latest available data
         getParkingData()
-        //Register for notifications
+        //Register for notifications to refresh data when app enters foreground
         NotificationCenter.default.addObserver(self, selector: #selector(getParkingData), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
 
 
@@ -72,10 +72,11 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         getParkingData()
     }
     func getParkingData(){
-        //Animate Activity Indicator
+        //Animate Activity Indicator and disable refresh button
         activityIndicator.startAnimating()
         refreshButton.isEnabled = false
         JunarClient.sharedInstance().queryJunar(completionHandlerForQuery: {(results, error) in
+            //Update UI
             DispatchQueue.main.async {
                 self.activityIndicator.stopAnimating()
                 self.refreshButton.isEnabled = true
@@ -100,12 +101,11 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
 //                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
-//                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
 //                garageArrays[3][Index.Open] = Constants.ClosedIndicator // test a garage being closed
                 DispatchQueue.main.async {
                 //check if more garages in Core Data than returned from API
                 if self.garageObjects.count > garageArrays.count {
-                    print("old garages hanging around!  clearing out database")
+//                    print("old garages hanging around!  clearing out database")
                     
                     //Clear all objects from Core Data
                     for object in self.garageObjects{
@@ -171,9 +171,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func findLocation(garage: Garage){
         
         if KnownGarages.keys.contains(garage.name!){
-            print("found garage named: \(garage.name)")
             let garageEntrances = KnownGarages[garage.name!] //array of entrance coordinates
-            print("Garage entrances: \(garageEntrances)")
             let coordinates = garageEntrances![0]  //Use first entrance for Pin location
             let coordinate = CLLocationCoordinate2D(latitude: (coordinates[Keys.Latitude])!, longitude: (coordinates[Keys.Longitude])!)
             if (garageEntrances?.count)! > 1{
@@ -187,7 +185,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         else{
         //Forward Geocode garage location
-            print("searching for garage location of : \(garage.name)")
+//            print("searching for garage location of : \(garage.name)")
             let request = MKLocalSearchRequest()
             request.naturalLanguageQuery = garage.name! + Constants.City
             let search = MKLocalSearch(request: request)
@@ -224,7 +222,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 newPin.longitude2 = PinProperties.NoCoordinate
             }
             self.storedPins.append(newPin)
-            print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
+//            print("garage at longitude: \(newPin.longitude) latitude \(newPin.latitude)")
             //Create map annotation for display
             let annotation = MKPointAnnotation()
             annotation.coordinate.latitude = newPin.latitude
@@ -234,7 +232,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.mapView.addAnnotation(annotation)
             self.mapView.reloadInputViews()
             self.numberOfPinsOnMap += 1
-            print("number of pins on map: \(self.numberOfPinsOnMap)")
             delegate.saveContext()
         }
     }
@@ -331,17 +328,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         mapView.addAnnotations(annotations)
     }
     
-    class func getAnnotation(pin: Pin)-> MKPointAnnotation{
-        let lat = CLLocationDegrees(pin.latitude  )
-        let long = CLLocationDegrees(pin.longitude )
-        let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        //create annotation
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        return annotation
-        
-        
-    }
+
 
 //MARK: navigation methods
     func showSelectedGarage(coordinates: CLLocationCoordinate2D, title: String?, secondEntrance: CLLocationCoordinate2D?){
@@ -393,7 +380,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         do {
             let results = try delegate.persistentContainer.viewContext.fetch(fetchRequest)
             garageObjects = results
-            print("Number of garages loaded = \(results.count)")
         } catch let error as NSError {
             print("Could not fetch Garages. \(error), \(error.userInfo)")
         }
@@ -417,7 +403,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.annotations.append(annotation)
              }
             storedPins = results
-            print("Number of pins loaded = \(results.count)")
         } catch let error as NSError {
             print("Could not fetch Pins. \(error), \(error.userInfo)")
         }
@@ -427,7 +412,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     //Check if data too old to be useful to display in table
     func isStale(timestamp: NSDate)->Bool{
-//        print("timeIntervalSinceNow = \(timestamp.timeIntervalSinceNow)")
         if timestamp.timeIntervalSinceNow < Constants.ParkingDataExpiration { //negative values hence the less than sign
             return true
         }

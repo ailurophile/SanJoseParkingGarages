@@ -11,19 +11,16 @@ import Foundation
 struct PinProperties {
     static let Lat = "latitude"
     static let Lon = "longitude"
-    static let Lat2 = "latitude2"
-    static let Lon2 = "longitude2"
     static let NoCoordinate = 0.0
 }
 struct Constants {
     static let SmallScreenWidth = 330.0
     static let ParkingDataExpiration = -1800.0 //30 minutes to stale
-    static let MapDataExpiration = -86400.0 //24 hours to stale
     static let City = "San Jose, CA"
-    static let MapCenterLatitude = 37.33756108554114
-    static let MapCenterLongitude = -121.8878410859226
-    static let LatDelta = 0.019108101105551611
-    static let LonDelta = 0.071067820396351067
+    static let MapCenterLatitude = 37.335522964085534
+    static let MapCenterLongitude = -121.88737956485454
+    static let LatDelta = 0.011057281247424555
+    static let LonDelta = 0.034094146355570842
     static let StaleData = "?"
     static let ClosedIndicator = "Closed"
     static let DefaultGarageName = "Garage"

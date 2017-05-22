@@ -41,7 +41,6 @@ class JunarClient: NSObject{
     //Request parking space data from API
     func queryJunar( completionHandlerForQuery: @escaping ( _ results: Any?, _ error: NSError?) -> Void){
         let url = getURL()
-//        print(url)
         let request = URLRequest(url: url)
         let session = URLSession.shared
         var task = session.dataTask(with: request as URLRequest) { data, response, error in

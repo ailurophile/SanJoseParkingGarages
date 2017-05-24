@@ -43,12 +43,14 @@ class LocationViewController: UIViewController, UITextViewDelegate{
     }
     
 //MARK: UI interaction & User defaults 
-    @IBAction func saveButtonPressed(_ sender: Any) {
+
+    
+    @IBAction func saveReminder(_ sender: Any) {
         UserDefaults.standard.setValue(locationTextView.text, forKey: Keys.LocationReminder)
         UserDefaults.standard.synchronize()
         self.navigationController?.popViewController(animated: true)
+
     }
-    
     @IBAction func locationTextSwitchSet(_ sender: Any) {
         UserDefaults.standard.setValue(textViewSwitch.isOn, forKey: Keys.TextViewClears)
         UserDefaults.standard.synchronize()

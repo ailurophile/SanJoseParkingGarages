@@ -224,7 +224,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
                                 <rect key="frame" x="47" y="74" width="226" height="420"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" text="Enter reminder to help you locate your car when you return to garage." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" text="Enter reminder to help you locate your car when you return to garage." textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
                                         <rect key="frame" x="0.0" y="0.0" width="226" height="229"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -232,6 +232,16 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <mask key="constraints">
+                                                <exclude reference="jfz-26-BFV"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="jfz-26-BFV"/>
+                                            </mask>
+                                        </variation>
                                     </textView>
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-eE-YOw">
                                         <rect key="frame" x="0.0" y="245" width="226" height="175"/>
@@ -262,6 +272,11 @@
                                             <constraint firstItem="iIl-UM-TMB" firstAttribute="centerX" secondItem="3VX-eE-YOw" secondAttribute="centerX" id="UvA-YD-A0a"/>
                                             <constraint firstItem="o2E-b7-YaC" firstAttribute="top" secondItem="3VX-eE-YOw" secondAttribute="top" constant="1" id="a3b-Sz-7V1"/>
                                         </constraints>
+                                        <variation key="heightClass=compact-widthClass=compact">
+                                            <mask key="constraints">
+                                                <exclude reference="0Lv-KH-6oW"/>
+                                            </mask>
+                                        </variation>
                                     </stackView>
                                 </subviews>
                                 <constraints>

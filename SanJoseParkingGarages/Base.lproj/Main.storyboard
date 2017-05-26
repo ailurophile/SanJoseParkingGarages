@@ -224,7 +224,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
                                 <rect key="frame" x="47" y="74" width="226" height="420"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" text="Enter reminder to help you locate your car when you return to garage." textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" bounces="NO" keyboardDismissMode="onDrag" text="Enter reminder to help you locate your car when you return to garage." textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
                                         <rect key="frame" x="0.0" y="0.0" width="226" height="229"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -246,7 +246,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="254" verticalHuggingPriority="254" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3VX-eE-YOw">
                                         <rect key="frame" x="0.0" y="245" width="226" height="175"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2E-b7-YaC" userLabel="Retain text label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit Text    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2E-b7-YaC" userLabel="Retain text label">
                                                 <rect key="frame" x="0.0" y="1" width="89" height="173"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -258,7 +258,7 @@
                                                     <action selector="locationTextSwitchSet:" destination="eDi-PY-3o3" eventType="valueChanged" id="Dnv-eW-zJ5"/>
                                                 </connections>
                                             </switch>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replace" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohW-ae-7XT" userLabel="Clear text label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Replace    " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohW-ae-7XT" userLabel="Clear text label">
                                                 <rect key="frame" x="138" y="1" width="88" height="173"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -280,7 +280,9 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="1TJ-cY-W25" secondAttribute="trailing" id="Kl7-6l-1Yd"/>
                                     <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="3VX-eE-YOw" secondAttribute="leading" id="O8m-as-wIh"/>
+                                    <constraint firstItem="1TJ-cY-W25" firstAttribute="leading" secondItem="me4-fX-SI0" secondAttribute="leading" id="T1v-ho-C18"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -306,7 +308,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tw8-ki-A6j" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1277" y="202"/>
+            <point key="canvasLocation" x="1276.056338028169" y="200.625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LaU-Ii-txe">

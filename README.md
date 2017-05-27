@@ -1,6 +1,6 @@
 # SanJoseParkingGarages
 
-The San Jose Parking Garages app downloads parking space availability and garage capacity data from the city of San Jose for the city-owned garages downtown allowing users to see their location relative to the various entrances of the selected garage and use Apple Maps for directions if so desired.  If the data stored in memory is older than 15 minutes when the app is loaded it will show ?? instead of a number in the spaces available column until fresh data is available from the network.  If a garage is closed, the word closed will appear in the spaces available column.  There is also a location notepad which the user can use to store a reminder about where the car is parked for retrieval later.
+The San Jose Parking Garages app downloads parking space availability data from the city of San Jose for the city-owned garages downtown allowing users to see their location relative to the various entrances of the selected garage and use Apple Maps for directions if so desired.  If the data stored in memory is older than 15 minutes when the app is loaded it will show ?? instead of a number in the spaces available column until fresh data is available from the network.  If a garage is closed, the word closed will appear in the spaces available column.  There is also a location notepad which the user can use to store a reminder about where the car is parked for retrieval later.
 
 ## Navigation
 
@@ -22,5 +22,5 @@ The San Jose Parking Garages app downloads parking space availability and garage
 ### Directions View
 
 * Pinch or open two fingers to zoom out or in on selected garage entrances and user location if Location Services allowed for the app.
-* Tap Update location button to move user pin (shown in blue on map) to the current location.  Continuous updating is not active to reduce batter drain.
+* Tap Update location button to move user pin (shown in blue on map) to the current location.  Continuous updating is not active to reduce battery drain.
 * Tap pin of desired garage entrance to use Apple Maps for driving directions.

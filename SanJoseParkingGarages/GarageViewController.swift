@@ -242,10 +242,12 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCell(withIdentifier: "GarageTableCell", for: indexPath) as! GarageTableCell
-        //Leave the word "Garage" off of name if device has small screen
-        if UIScreen.main.bounds.size.width < CGFloat(Constants.SmallScreenWidth){
+        //Leave the word "Garage" off of name if device has small screen and the name is long
+        let nameLength = garageObjects[indexPath.row].name?.characters.count
+        if UIScreen.main.bounds.size.width < CGFloat(Constants.SmallScreenWidth) && nameLength ?? 0 > Constants.LongestName{
             cell.nameLabel?.text = garageObjects[indexPath.row].name?.replacingOccurrences(of: "Garage", with: "")
         }
+        
         else {
             cell.nameLabel?.text = garageObjects[indexPath.row].name
         }
@@ -253,7 +255,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if isStale(timestamp: garageObjects[indexPath.row].timestamp!){
             cell.spacesLabel?.text = Constants.StaleData
         }
-        cell.capacityLabel?.text = garageObjects[indexPath.row].capacity
+//        cell.capacityLabel?.text = garageObjects[indexPath.row].capacity
         
         return cell
     }

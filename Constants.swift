@@ -24,6 +24,7 @@ struct Constants {
     static let StaleData = "?"
     static let ClosedIndicator = "Closed"
     static let DefaultGarageName = "Garage"
+    static let LongestName = 25
 
 }
 

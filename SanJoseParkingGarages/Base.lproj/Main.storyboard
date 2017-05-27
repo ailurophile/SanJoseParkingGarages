@@ -53,26 +53,20 @@
                                                 <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="brZ-u3-fK7" id="JX9-OJ-Lhl">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="xuV-vu-suD">
-                                                            <rect key="frame" x="8" y="0.0" width="552" height="44"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="xuV-vu-suD">
+                                                            <rect key="frame" x="8" y="0.0" width="304" height="44"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="GarageName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Phl-Dn-Tbo">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="410" height="44"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="243.5" height="44"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spaces" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FiB-FM-Plt">
-                                                                    <rect key="frame" x="419" y="0.0" width="56.5" height="44"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Capacity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s1Y-zm-zVe">
-                                                                    <rect key="frame" x="484.5" y="0.0" width="67.5" height="44"/>
+                                                                    <rect key="frame" x="247.5" y="0.0" width="56.5" height="44"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -88,7 +82,6 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="capacityLabel" destination="s1Y-zm-zVe" id="Vbx-U4-R1H"/>
                                                     <outlet property="nameLabel" destination="Phl-Dn-Tbo" id="p91-ia-KPL"/>
                                                     <outlet property="spacesLabel" destination="FiB-FM-Plt" id="YTo-aV-o37"/>
                                                 </connections>
@@ -209,7 +202,7 @@
             </objects>
             <point key="canvasLocation" x="1162.5" y="-600"/>
         </scene>
-        <!--Location Reminder-->
+        <!--Location View Controller-->
         <scene sceneID="lsl-sO-uRP">
             <objects>
                 <viewController id="eDi-PY-3o3" customClass="LocationViewController" customModule="SanJoseParkingGarages" customModuleProvider="target" sceneMemberID="viewController">
@@ -221,11 +214,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
+                            <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="me4-fX-SI0">
                                 <rect key="frame" x="47" y="74" width="226" height="420"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" bounces="NO" keyboardDismissMode="onDrag" text="Enter reminder to help you locate your car when you return to garage." textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
-                                        <rect key="frame" x="0.0" y="0.0" width="226" height="229"/>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="253" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xgo-fz-bZh">
+                                        <rect key="frame" x="83.5" y="0.0" width="59" height="45"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                        <state key="normal" title="Save">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="saveReminder:" destination="eDi-PY-3o3" eventType="touchUpInside" id="KQz-cM-gal"/>
+                                        </connections>
+                                    </button>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="248" verticalHuggingPriority="248" layoutMarginsFollowReadableWidth="YES" bounces="NO" keyboardDismissMode="onDrag" text="Enter reminder to help you locate your car when you return to garage. Press Save to store reminder." textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="1TJ-cY-W25">
+                                        <rect key="frame" x="0.0" y="61" width="226" height="168"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="143" id="jfz-26-BFV"/>
@@ -294,13 +297,6 @@
                             <constraint firstItem="me4-fX-SI0" firstAttribute="centerY" secondItem="ifw-55-nim" secondAttribute="centerY" id="xoI-1B-5M1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Location Reminder" id="VwO-MI-376">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="akY-qO-ax3">
-                            <connections>
-                                <action selector="saveReminder:" destination="eDi-PY-3o3" id="PME-LR-1WE"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
                     <connections>
                         <outlet property="locationTextView" destination="1TJ-cY-W25" id="6Fk-hi-jYt"/>
                         <outlet property="textViewSwitch" destination="iIl-UM-TMB" id="FJr-Za-ecz"/>

@@ -11,7 +11,7 @@ import Foundation
 class JunarClient: NSObject{
     struct Constants{
         //MARK: URLs
-        static let ApiScheme = "http"
+        static let ApiScheme = "https"
         static let ApiHost = "api.data.sanjoseca.gov"
         static let SessionPath = "/api/v2/datastreams/PARKI-GARAG-DATA/data.ajson/"
         static let HTTPMethod = "GET"

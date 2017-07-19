@@ -25,6 +25,8 @@ struct Constants {
     static let ClosedIndicator = "Closed"
     static let DefaultGarageName = "Garage"
     static let LongestName = 25
+    static let newGarageDataNotificationKey = "LisaLitchfield.newGarageDataNotificationKey"
+    static let networkRequestCompletedNotificationKey = "LisaLitchfield.networkRequestCompletedNotificationKey"
 
 }
 

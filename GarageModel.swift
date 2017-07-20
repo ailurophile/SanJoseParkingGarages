@@ -11,9 +11,9 @@ import UIKit
 import CoreData
 import MapKit
 
-protocol NewPins {
+//protocol NewPins {
 //    var pins: [Pin] {get set}
-}
+//}
 
 protocol NewPinsDelegate {
     func addNewPins( shouldAddPins pins: [Pin])
@@ -21,7 +21,7 @@ protocol NewPinsDelegate {
 }
 
 
-class GarageModel:NSObject, UITableViewDataSource, NewPins{
+class GarageModel:NSObject, UITableViewDataSource{
     var garageObjects :[Garage]!
     var storedPins:[Pin]!
     var pinDelegate: NewPinsDelegate?

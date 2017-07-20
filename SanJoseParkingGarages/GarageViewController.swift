@@ -8,14 +8,12 @@
 
 import UIKit
 import MapKit
-//import CoreData
 
 
 
 class GarageViewController: UIViewController, UITableViewDelegate, MKMapViewDelegate, NewPinsDelegate {
 
     var annotations = [MKAnnotation]()
-//    var numberOfPinsOnMap = 0
 
     var desiredLocation: CLLocationCoordinate2D!
     var destinationName = Constants.DefaultGarageName
@@ -30,7 +28,8 @@ class GarageViewController: UIViewController, UITableViewDelegate, MKMapViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        tableView.delegate = GarageModel.sharedInstance() as? UITableViewDelegate
+        tableView.delegate = self
+        tableView.dataSource = GarageModel.sharedInstance()
         GarageModel.sharedInstance().pinDelegate = self
         mapView.centerCoordinate = CLLocationCoordinate2DMake(Constants.MapCenterLatitude, Constants.MapCenterLongitude)
         let center = CLLocationCoordinate2DMake(Constants.MapCenterLatitude, Constants.MapCenterLongitude)
@@ -90,7 +89,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, MKMapViewDele
 // MARK: TableView Delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-                guard let pin = GarageModel.sharedInstance().garageObjects[indexPath.row].pin else{
+            guard let pin = GarageModel.sharedInstance().garageObjects[indexPath.row].pin else{
             sendAlert(self, message: "No location data for this garage")
             return
         }
@@ -156,7 +155,6 @@ class GarageViewController: UIViewController, UITableViewDelegate, MKMapViewDele
         
 
         mapView.removeAnnotations(mapView.annotations)
-//        numberOfPinsOnMap = annotations.count
         mapView.addAnnotations(annotations)
     }
     

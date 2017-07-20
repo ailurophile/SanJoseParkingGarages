@@ -72,7 +72,11 @@ class GarageViewController: UIViewController, UITableViewDelegate, MKMapViewDele
     func refreshParkingData(){
         activityIndicator.startAnimating()
         refreshButton.isEnabled = false
-        GarageModel.sharedInstance().getParkingData(self)
+        GarageModel.sharedInstance().getParkingData(completionHandler: {error in
+            if error != nil{
+                sendAlert(self, message: (error?.localizedDescription)!)
+            }
+        })
         
     }
     func enableUI(){

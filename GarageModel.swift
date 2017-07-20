@@ -125,25 +125,31 @@ class GarageModel:NSObject, UITableViewDataSource{
         
     }
 //MARK: Model functions
-    func getParkingData(_ viewController: UIViewController){
+    func getParkingData(completionHandler: @escaping ( _ error: NSError?) -> Void){
         //Animate Activity Indicator and disable refresh button
-                JunarClient.sharedInstance().queryJunar(completionHandlerForQuery: {(results, error) in
+        JunarClient.sharedInstance().queryJunar(completionHandlerForQuery: {(results, error) in
+            func sendError(_ error: String) {
+                let userInfo = [NSLocalizedDescriptionKey : error]
+                completionHandler(NSError(domain: "getParkingData", code: 2, userInfo: userInfo))
+            }
+            
             //Update UI
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: Notification.Name(rawValue: Constants.networkRequestCompletedNotificationKey), object: self)
 
                 
             }
+                    
             guard error == nil else{
                 print(error?.localizedDescription ?? "?? no localized description to print")
-                notifyUser(viewController, message: "Error: \(error!.localizedDescription)")
+                sendError("Error: \(error!.localizedDescription)")
                 
                 
                 return
             }
             //Load garage dictionary
             guard let data = results as! [String: Any]? else{
-                notifyUser(viewController, message: "No garage data!")
+                sendError("No garage data!")
                 return
             }
             //["Garage_Name","Garage_Status","Available_Visitor_Spaces","Total_Visitor_Spaces"]
@@ -209,7 +215,7 @@ class GarageModel:NSObject, UITableViewDataSource{
             }
                 
             else {
-                notifyUser(viewController, message: "No results key found in garage data!")
+                sendError("No results key found in garage data!")
                 
             }
             

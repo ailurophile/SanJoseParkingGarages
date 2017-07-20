@@ -118,6 +118,7 @@ class GarageModel:NSObject, UITableViewDataSource{
                 pins.append(pin)
             }
             storedPins = results
+            pinDelegate?.clearPins()
             pinDelegate?.addNewPins(shouldAddPins: pins)
         } catch let error as NSError {
             print("Could not fetch Pins. \(error), \(error.userInfo)")
@@ -158,7 +159,7 @@ class GarageModel:NSObject, UITableViewDataSource{
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
-                //                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
+//                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
                 //                garageArrays[3][Index.Open] = Constants.ClosedIndicator // test a garage being closed
                 DispatchQueue.main.async {
                     //check if more garages in Core Data than returned from API

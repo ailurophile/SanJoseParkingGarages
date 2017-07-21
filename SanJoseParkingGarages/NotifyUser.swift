@@ -9,13 +9,6 @@
 import Foundation
 import UIKit
 
-// Method to show user alert from on background queue
-func notifyUser(_ viewController: UIViewController, message:String){
-    DispatchQueue.main.sync {
-        sendAlert(viewController, message: message)
-    }
-}
-
 // Method to show user alert from on main queue
 func sendAlert(_ viewController: UIViewController, message:String){
     

@@ -21,7 +21,7 @@ struct Constants {
     static let MapCenterLongitude = -121.88737956485454
     static let LatDelta = 0.011057281247424555
     static let LonDelta = 0.034094146355570842
-    static let StaleData = "?"
+    static let StaleData = "?"  //To be displayed if stored parking data too old
     static let ClosedIndicator = "Closed"
     static let DefaultGarageName = "Garage"
     static let LongestName = 25

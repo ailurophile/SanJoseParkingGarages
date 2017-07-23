@@ -51,7 +51,7 @@ class GarageViewController: UIViewController, UITableViewDelegate, MKMapViewDele
     //MARK: NewPinsDelegate
     func addNewPins( shouldAddPins pins: [Pin]){
         for pin in pins{
-            print("pin at coordinates: \(pin.latitude),\(pin.longitude)")
+//            print("pin at coordinates: \(pin.latitude),\(pin.longitude)")
             //Create map annotation for display
             let annotation = MKPointAnnotation()
             annotation.coordinate.latitude = pin.latitude

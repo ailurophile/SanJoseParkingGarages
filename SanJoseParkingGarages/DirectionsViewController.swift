@@ -60,8 +60,8 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         let reuseId = "pin"
         
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
-        let type = annotation.description
-        print("annotation type: \(type) coordinate: \(annotation.coordinate)")
+//        let type = annotation.description
+//        print("annotation type: \(type) coordinate: \(annotation.coordinate)")
         if pinView == nil {
             pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
             pinView!.canShowCallout = false
@@ -78,27 +78,14 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
                     else{
                         pinView!.pinTintColor = .blue
                     }
-                    /*
-                    if userAnnotations.contains(annotation as! MKPointAnnotation){
-                        pinView!.pinTintColor = .blue
-                    }
-                    else{
-                        
-                        pinView!.pinTintColor = .purple
-                    }*/
+
                 }
                 else{
                     
                     pinView!.pinTintColor = .purple
                 }
             }
-/*            if isGarageEntrance(annotation: annotation as! MKPointAnnotation){
-                pinView!.pinTintColor = .purple
-            }
-            else{
-                pinView!.pinTintColor = .blue
-            }
- */
+
             pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         else {

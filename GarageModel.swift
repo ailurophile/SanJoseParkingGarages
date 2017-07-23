@@ -159,6 +159,7 @@ class GarageModel:NSObject, UITableViewDataSource{
                 let delegate = UIApplication.shared.delegate as! AppDelegate
                 let context = delegate.persistentContainer.viewContext
                 garageArrays.removeFirst()  //remove column headings for web page
+//                garageArrays.append(["Pavilion Garage","Open","75","100"])  //test new garage
 //                garageArrays.removeFirst()  //remove garage so it will look like a garage has been sold
                 //                garageArrays[3][Index.Open] = Constants.ClosedIndicator // test a garage being closed
                 DispatchQueue.main.async {

@@ -150,19 +150,21 @@
                                         <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qd2-xc-2o6">
-                                        <rect key="frame" x="0.0" y="23" width="288" height="416.5"/>
-                                    </mapView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Garage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggo-yR-c3y">
-                                        <rect key="frame" x="0.0" y="439.5" width="288" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="to Garage" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggo-yR-c3y">
+                                        <rect key="frame" x="0.0" y="23" width="288" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Qd2-xc-2o6">
+                                        <rect key="frame" x="0.0" y="43.5" width="288" height="416.5"/>
+                                    </mapView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="Ggo-yR-c3y" secondAttribute="trailing" id="5b8-61-aiT"/>
                                     <constraint firstItem="Ggo-yR-c3y" firstAttribute="leading" secondItem="MFa-JS-gTj" secondAttribute="leading" id="Mdp-QG-XZZ"/>
+                                    <constraint firstItem="Qd2-xc-2o6" firstAttribute="top" secondItem="Ggo-yR-c3y" secondAttribute="bottom" id="ctt-pm-RDV"/>
+                                    <constraint firstItem="Ggo-yR-c3y" firstAttribute="top" secondItem="0bX-rT-AkO" secondAttribute="bottom" id="fcN-Jb-o8u"/>
                                     <constraint firstAttribute="bottom" secondItem="Qd2-xc-2o6" secondAttribute="bottom" id="hFd-Bf-Izn"/>
                                     <constraint firstAttribute="trailing" secondItem="Qd2-xc-2o6" secondAttribute="trailing" id="msj-0V-Fql"/>
                                     <constraint firstItem="Ggo-yR-c3y" firstAttribute="top" secondItem="Qd2-xc-2o6" secondAttribute="bottom" id="tju-vR-qv3"/>
@@ -171,7 +173,8 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="hFd-Bf-Izn"/>
+                                        <exclude reference="tju-vR-qv3"/>
+                                        <exclude reference="wBh-HC-Ara"/>
                                     </mask>
                                 </variation>
                             </stackView>
@@ -186,7 +189,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="cUM-Q9-eqf">
-                        <barButtonItem key="rightBarButtonItem" title="Update location" id="IFJ-g8-ccm">
+                        <barButtonItem key="rightBarButtonItem" title="Locate Me" id="IFJ-g8-ccm">
                             <connections>
                                 <action selector="updateLocationButtonSelected:" destination="Gvk-4N-2ru" id="oJ8-tN-ZY6"/>
                             </connections>

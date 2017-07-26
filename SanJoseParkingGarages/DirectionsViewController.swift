@@ -26,7 +26,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        garageLabel.text = garageName
+        garageLabel.text = "to \(garageName)"
         mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation

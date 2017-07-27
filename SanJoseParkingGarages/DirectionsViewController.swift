@@ -30,12 +30,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
         mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-            mapView.showsUserLocation = true
-            locationManager.requestLocation()
-        } else {
-            locationManager.requestWhenInUseAuthorization()
-        }
+
         
         mapView.centerCoordinate = targetGarage
 
@@ -163,7 +158,7 @@ class DirectionsViewController: UIViewController, MKMapViewDelegate, CLLocationM
     }
     //Zoom in on garage location
     func setDefaultSpan(){
-        let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta, longitudeDelta: Constants.LonDelta)
+        let span = MKCoordinateSpan(latitudeDelta: Constants.LatDelta/2, longitudeDelta: Constants.LonDelta/2)
         let region = MKCoordinateRegionMake(targetGarage, span)
         mapView.setRegion(region, animated: true)
     }

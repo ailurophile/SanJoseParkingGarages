@@ -17,10 +17,10 @@ The San Jose Parking Garages app downloads parking space availability data from 
 * Tap inside text box to type in a reminder of where the car is parked.
 * Tap Save button to store the contents of the text box in memory.
 * Tap outside of text box to dismiss keyboard.
-* Select desired text box behavior via switch. Selecting Edit text will cause the contents of the box to remain on screen when the box is touched so the user can make edits.  Selecting Replace will cause the text box to clear when touched so that an entirely new note can easily be entered.  This selection is stored so the desired behavior will be the default the next time this view is active.
+* Select desired text box behavior via switch. Selecting Edit Text will cause the contents of the box to remain on screen when the box is touched so the user can make edits.  Selecting Replace will cause the text box to clear when touched so that an entirely new note can easily be entered.  This selection is stored so the desired behavior will be the default the next time this view is active.
 
 ### Directions View
 
 * Pinch or open two fingers to zoom out or in on selected garage entrances and user location if Location Services allowed for the app.
-* Tap Update location button to move user pin (shown in blue on map) to the current location.  Continuous updating is not active to reduce battery drain.
+* Tap the Locate Me button to show user pin in blue on map or to move it to the current location.  Continuous updating is not active to reduce battery drain.
 * Tap pin of desired garage entrance to use Apple Maps for driving directions.
